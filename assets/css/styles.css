@@ -48,7 +48,19 @@ html, body {
     right: 20px; 
     transform: translateY(-50%);
 }
-
+label{
+    font-size: 13px !important;
+    color: var(--color1);
+}
+/* numero telephone ----------------------*/
+.iti {
+    width: 100%;
+}
+button.iti__selected-country{
+    border-right: 1px solid rgba(0, 0, 0, 0.144);
+    padding-right: 4px;
+}
+/*----------------------------------------*/
 .test{
     border: 1px solid red;
 }

@@ -13,6 +13,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
         integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/25.2.1/build/css/intlTelInput.min.css" integrity="sha512-X3pJz9m4oT4uHCYS6UjxVdWk1yxSJJIJOJMIkf7TjPpb1BzugjiFyHu7WsXQvMMMZTnGUA9Q/GyxxCWNDZpdHA==" crossorigin="anonymous" referrerpolicy="no-referrer" />        
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,33 +48,39 @@
 
             <div class="col-md-6 d-flex align-items-center justify-content-center flex-column p-0">
                 <div class="mx-4 p-2">
-                    <div class="mb-5">
-                        <h1 class="ff-inter-bold mb-1 text-center">Content de vous revoir</h1>
+                    <div class="mb-4">
+                        <h1 class="ff-inter-bold mb-1 text-center">Bienvenue</h1>
                         <p class="text-center ff-inter-regular text-secondary">
-                            Nouveau sur DokoteraMG? <a href="#">S'inscrire</a>
+                            Vous connaissez déjà DokoteraMG? <a href="#">Se connecter</a>
                         </p>
                     </div>
 
                     <form>
-                        <div class="mb-4">
-                            <label for="email" class="form-label mb-1">Adresse email</label>
+                        <div class="mb-3">
+                            <label for="email" class="form-label mb-1 ">Adresse email</label>
                             <input type="email" class="form-control" id="email" placeholder="Adresse email">
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
+                            <label for="tel" class="form-label mb-1">Numéro de téléphone</label> <br>
+                            <input id="phone" name="phone" class="form-control w-100" type="tel">
+                        </div>
+                        <div class="mb-3">
                             <label for="password" class="form-label mb-1">Votre mot de passe</label>
                             <div class="position-relative">
                                 <input type="password" class="form-control" id="password">
                                 <span id="toogle-show-password" class="position-absolute eyes"><i class="bi bi-eye-slash"></i></span>
-                                <!-- <i class="bi bi-eye-slash"></i> -->
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3">Se connecter</button>
-                        <div class="mb-4 d-flex justify-content-between">
+                        <div class="mb-3">
+                            <label for="tel" class="form-label mb-1">Numéro de téléphone</label>
+                            <input type="date" name="" class="form-control" id="">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">S’inscrire</button>
+                        <div class="mb-3 d-flex justify-content-between">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="check">
-                                <label class="form-check-label" for="check">Souviens-toi de moi</label>
+                                <label class="form-check-label fs-6" for="check">Souviens-toi de moi</label>
                             </div>
-                            <a href="#">Mot de passe oublié ? </a>
                         </div>
                     </form>
 
@@ -109,8 +116,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="./assets/js/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/25.2.1/build/js/intlTelInput.js" integrity="sha512-oJIaDi1DymP8JKAmQIW4WYqR9fycc+IpQ5eQDRoH5BtMN33BonMGKDPv+Jwauf0Oi42aba1B0vHM8qYnphZ8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-</body>
-
+        <script src="./assets/js/main.js"></script>
+        <script>
+        
+            
+        </script>
+    </body>
 </html>
