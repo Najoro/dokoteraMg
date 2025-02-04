@@ -5,6 +5,7 @@
 }
 html, body {
     height: 100vh;
+    font-family: 'Inter', sans-serif !important;
     margin: 0;
 }
 
@@ -15,7 +16,6 @@ html, body {
 .ff-inter-bold{
     font-family:'Inter',serif;
     font-weight: 700;
-
 }
 .ff-inter-regular{
     font-family:'Inter',sans-serif;
@@ -25,6 +25,10 @@ html, body {
 .bg-linear-top{
     background: linear-gradient(to top, var(--color2), var(--color3)) ;
 }
+.bg-linear-right{
+    background: linear-gradient(to right, var(--color2), var(--color3)) ;
+}
+
 .icone-svg{
     width: 20px; 
     height: 20px;
