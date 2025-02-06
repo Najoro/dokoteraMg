@@ -22,6 +22,9 @@ html, body {
     font-weight: normal;
 }
 
+.fs-14-px{
+    font-size: 14px !important;
+}
 .bg-linear-top{
     background: linear-gradient(to top, var(--color2), var(--color3)) ;
 }

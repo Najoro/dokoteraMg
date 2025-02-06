@@ -63,14 +63,6 @@
                 </div>
 
                 <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
-                    <li class="nav-item my-3">
-                        <i class="bi bi-search mx-2 text-primary"></i>
-                        <a href="#" class="m-0 text-decoration-none text-dark-emphasis fw-bold">Trouver des médecins</a>
-                    </li>
-                    <li class="nav-item my-2">
-                        <i class="bi bi-geo-alt mx-2 text-primary"></i>
-                        <a href="#" class="m-0 text-decoration-none text-dark-emphasis fw-bold ">Emplacement</a>
-                    </li>
                     <li class="nav-item my-2">
                         <a class="nav-link d-flex align-items-center fw-bold opacity-75" aria-current="page" href="#">
                             Passez à la version premium
@@ -104,20 +96,24 @@
         </div>
 
         <!--Recherche-->
-        <div class="d-none d-md-flex d-flex justify-content-center position-relative mb-5">
+        <div class="d-flex justify-content-center position-relative mb-5">
             <div class="d-flex justify-content-center bg-white rounded-3 position-absolute shadow" style="top: -30px">
-                <span class="m-3 d-flex d-flex justify-content-center align-items-center ">
-                    <i class="bi bi-search mx-2"></i>
-                    <a href="#" class="m-0 text-decoration-none text-dark-emphasis fw-light">Trouver des médecins</a>
-                </span>
-                <span class="d-flex m-3 justify-content-center align-items-center border-start">
-                    <i class="bi bi-geo-alt mx-2"></i>
-                    <a href="#" class="m-0 text-decoration-none text-dark-emphasis fw-light ">Emplacement</a>
-                </span>
-                <span class="d-flex m-3 d-flex justify-content-center align-items-center">
-                    <i class="bi bi-crosshair mx-2"></i>
-                    <button class="btn btn-primary" >Recherche</button>
-                </span>
+                <div class="input-group  bg-white rounded-3 ">
+                    <span class="input-group-text bg-white" id="search">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control bg-white" placeholder="Trouver des médecins " aria-label="Example text with two button addons" aria-describedby="search">
+                    <span class="input-group-text bg-white" id="emplacement">
+                        <i class="bi bi-geo-alt"></i>
+                    </span>
+                    <input type="text" class="form-control bg-white" placeholder="Emplacement" aria-label="Example text with two button addons" aria-describedby="emplacement">
+                    <div class="p-2 d-flex">
+                        <span class="input-group-text bg-white border-0" id="emplacement">
+                            <i class="bi bi-crosshair"></i>
+                        </span>
+                        <button class="btn btn-primary" type="button">Button</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -245,7 +241,7 @@
                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                 </svg>
-                <p class="mb-3">Veuillez activer votre emplacement afin que nous puissions trouver des médecins à proximité. <a href="#">Activer maintenant</a></p>
+                <p class="mb-3 text-center">Veuillez activer votre emplacement afin que nous puissions trouver des médecins à proximité. <a href="#">Activer maintenant</a></p>
                 
             </div>
         </div>
