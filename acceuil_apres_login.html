@@ -19,6 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
 
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -232,10 +233,16 @@
                         </div>
                     </div>
                     <!--Calandar-->
-                    <div class="col-md-6">CALANDAR</div>
+                    <div class="col-md-6">
+                        <div id='app'>
+                            <v-calendar title-position="left"></v-calendar>
+                            <v-date-picker v-model='selectedDate' />
+                          </div>
+                        as
+                    </div>
                 </div>
                 <!-- Recommended Doctors Section -->
-                <div class="container py-5">
+                <div class="container p-3 border">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="h3 mb-0">Médecins recommandés</h2>
                         <a href="#" class="text-primary">Voir Tout</a>
@@ -351,7 +358,7 @@
 
             </div>
         </div>
-
+        
     </main>
 
 
@@ -367,6 +374,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
+        
+        <script>
+            new     ({
+                el: '#app',
+                data: {
+                  selectedDate: null,
+                }
+              })
+            </script>
+
     <script src="./assets/js/main.js"></script>
 
 </body>

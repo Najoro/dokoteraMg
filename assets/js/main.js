@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  Calandar.init();
+
   Evenement.toogleShowPassword();
   Evenement.initlTelInput();
 });
@@ -28,4 +30,26 @@ const Evenement = {
       loadUtils: () => import("/intl-tel-input/js/utils.js?1733756310855"), // for formatting/placeholders etc
     });
   },
+};
+
+const Calandar = {
+  init: function () {
+    var eventDates = ["14/02/2025", "22/02/2025"]; 
+    $("#datepicker").datepicker({
+      format: "dd/mm/yyyy",
+      todayHighlight: true,
+      language: 'fr',
+      beforeShowDay: function (date) {
+        var dateString = ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear();
+        
+        if (eventDates.includes(dateString)) {
+          return { 
+            classes: "bg-primary text-white rounded-circle square-date",
+           };
+        }
+      },
+    });
+  },
+
+
 };

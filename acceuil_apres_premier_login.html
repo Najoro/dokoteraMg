@@ -13,6 +13,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
         integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet">
+
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +99,8 @@
             <div class="col-lg-2 border">
                 <div class="h-100  d-none d-lg-block position-fixed" style="min-width: 100px; height: 100vh;">
                     <div class="my-5 mt-3">
-                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG</h5>
+                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG
+                        </h5>
                     </div>
                     <ul class="list-unstyled list-group  d-flex justify-content-between h-25">
                         <li class="list-group-item border-0 active shadow opacity-75">
@@ -115,16 +119,16 @@
                             <a href="" class="text-reset text-decoration-none fs-14-px">
                                 <i class="bi bi-calendar fs-5 mx-1"></i>
                                 <span> Ma disponibilité</span>
-    
-    
+
+
                             </a>
                         </li>
                         <li class="list-group-item border-0 shadow opacity-75">
                             <a href="" class="text-reset text-decoration-none fs-14-px ">
                                 <i class="bi bi-person-circle fs-5 mx-1"></i>
                                 <span>Documents</span>
-    
-    
+
+
                             </a>
                         </li>
                         <li class="list-group-item border-0 shadow opacity-75">
@@ -140,7 +144,7 @@
                 </div>
 
             </div>
-            
+
 
             <div class="col-lg-10 p-3">
                 <!--search bar-->
@@ -194,7 +198,7 @@
                 </div>
 
                 <div class="row my-3">
-                    <div class="col-md-6">
+                    <div class="col-md-6 my-3">
                         <div class="bg-linear-right rounded-4 text-white">
                             <div class="row">
                                 <div class="col-md-8 p-4">
@@ -232,10 +236,27 @@
                         </div>
                     </div>
                     <!--Calandar-->
-                    <div class="col-md-6">CALANDAR</div>
+                    <div class="col-md-6">
+                        <div class="p-4 h-100 border rounded-2">
+                            <div class="d-flex  justify-content-between align-items-center">
+                                <h3 class="ff-inter-normal">Rendez-vous à venir</h3>
+                                <a href="#" class="text-decoration-none fs-14-px fw-bold">Voir tout <span class="mx-2"> > </span></a>
+                            </div>
+                            <!--Calandar-->
+                            <div class="calandar">
+                                <div id="datepicker" class="my-3"></div>
+                                <div class="rendez-vous">
+                                    <div class="sans-rendez-vous d-flex justify-content-center align-items-center flex-column">
+                                        <i class="bi bi-calendar-week fs-1 text-primary"></i>
+                                        <h4 class="fs-5">Aucun rendez-vous à venir</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Recommended Doctors Section -->
-                <div class="container py-5">
+                <div class="container p-3 border">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="h3 mb-0">Médecins recommandés</h2>
                         <a href="#" class="text-primary">Voir Tout</a>
@@ -367,6 +388,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"></script> <!-- Ajout de la langue française -->
+
+
     <script src="./assets/js/main.js"></script>
 
 </body>

@@ -2,6 +2,7 @@
     --color1 : #274760;
     --color2 : #86BBF1;
     --color3 : #D2EAEF;
+    --color4 : rgba(238, 237, 237, 0.616);
 }
 html, body {
     height: 100vh;
@@ -71,3 +72,23 @@ button.iti__selected-country{
 .test{
     border: 1px solid red;
 }
+/*DATEPICKER----------------------------------------*/
+ #datepicker {
+    width: 100% !important;
+    border-radius: 20px;
+    padding: 10px;
+    background: var(--color4);
+}
+.datepicker, .datepicker-days, .table-condensed {
+    width: 100%;
+    color: var(--color1);
+    font-weight: "800";
+}
+.table-condensed td, .day, .today {
+    height: 30px;
+    width: 40px !important;
+    border-radius: 50%;
+}
+ .day.active{
+    background: #74b0e7 !important;
+ }  
