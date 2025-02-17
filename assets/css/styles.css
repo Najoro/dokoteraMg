@@ -32,7 +32,9 @@ html, body {
 .bg-linear-right{
     background: linear-gradient(to right, var(--color2), var(--color3)) ;
 }
-
+.bg-light{
+    background: var(--color4);
+}
 .icone-svg{
     width: 20px; 
     height: 20px;
@@ -91,4 +93,4 @@ button.iti__selected-country{
 }
  .day.active{
     background: #74b0e7 !important;
- }  
+ }
