@@ -2,12 +2,16 @@
     --color1 : #274760;
     --color2 : #86BBF1;
     --color3 : #D2EAEF;
-    --color4 : rgba(238, 237, 237, 0.616);
+    --color4 : #F6F6F6;
 }
 html, body {
     height: 100vh;
     font-family: 'Inter', sans-serif !important;
     margin: 0;
+    background-color: var(--color4);
+}
+nav , .nav-bar-lateral{
+    background-color: white !important;
 }
 
 .ff-poppins-bold{
@@ -93,4 +97,10 @@ button.iti__selected-country{
 }
  .day.active{
     background: #74b0e7 !important;
+ }
+
+ /*profil*/
+ #tabs-general li .active{
+    background: white !important;
+    border: none !important;
  }
