@@ -4,16 +4,7 @@
     --color3 : #D2EAEF;
     --color4 : #F6F6F6;
 }
-html, body {
-    height: 100vh;
-    font-family: 'Inter', sans-serif !important;
-    margin: 0;
-    background-color: var(--color4);
-}
-nav , .nav-bar-lateral{
-    background-color: white !important;
-}
-
+/*principale -----------------------*/
 .ff-poppins-bold{
     font-family: 'Poppins', "serif";
     font-weight: 700;
@@ -25,6 +16,15 @@ nav , .nav-bar-lateral{
 .ff-inter-regular{
     font-family:'Inter',sans-serif;
     font-weight: normal;
+}
+html, body {
+    height: 100vh;
+    font-family: 'Inter', sans-serif !important;
+    margin: 0;
+    background-color: var(--color4);
+}
+nav , .nav-bar-lateral{
+    background-color: white !important;
 }
 
 .fs-14-px{
@@ -66,7 +66,7 @@ label{
     font-size: 13px !important;
     color: var(--color1);
 }
-/* numero telephone ----------------------*/
+/* numero telephone----------------------*/
 .iti {
     width: 100%;
 }
@@ -78,7 +78,7 @@ button.iti__selected-country{
 .test{
     border: 1px solid red;
 }
-/*DATEPICKER----------------------------------------*/
+/*datepicker----------------------------------------*/
  #datepicker {
     width: 100% !important;
     border-radius: 20px;
@@ -98,8 +98,13 @@ button.iti__selected-country{
  .day.active{
     background: #74b0e7 !important;
  }
+ /*premie rlogin-----------------------------*/
+ .appointments{
+    max-height: 340px;
+    overflow: auto;
+ }
 
- /*profil*/
+ /*profil----------------------------------------------*/
  #tabs-general li .active{
     background: white !important;
     border: none !important;
@@ -117,7 +122,7 @@ button.iti__selected-country{
     right: 0 !important;
     left: 10% !important; /*Si le btn est off*/
 }
- .switch-handle {
+.switch-handle {
     position: relative;
     margin: 0 auto;
     padding-top: 0;
@@ -131,6 +136,14 @@ button.iti__selected-country{
     border-radius: 50%;
  }
 
- .switch-on, .switch-off{
+.switch-on, .switch-off{
     display: none;
  }
+
+
+ /* FULLCALANDAR -------------------------------------*/
+ .has-events {
+    background-color: blue !important; /* Couleur de fond pour les dates avec événements */
+    color: white; /* Changer la couleur du texte pour le rendre lisible */
+}
+
