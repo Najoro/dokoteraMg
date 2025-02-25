@@ -3,6 +3,7 @@
     --color2 : #86BBF1;
     --color3 : #D2EAEF;
     --color4 : #F6F6F6;
+    --color5 :  rgb(238, 237, 237);
 }
 /*principale -----------------------*/
 .ff-poppins-bold{
@@ -142,8 +143,59 @@ button.iti__selected-country{
 
 
  /* FULLCALANDAR -------------------------------------*/
+ #today-events{
+    /* height: 100px; */
+    height: 140px;
+    overflow: auto;
+ }
  .has-events {
-    background-color: blue !important; /* Couleur de fond pour les dates avec événements */
-    color: white; /* Changer la couleur du texte pour le rendre lisible */
+    background-color: var(--color2) !important; /* Couleur de fond pour les dates avec événements */
+    color: white !important; /* Changer la couleur du texte pour le rendre lisible */
+}
+.fc th a{
+    text-align: center;
+    text-transform: capitalize;
+    color: var(--color1) !important;
+}
+#calendar {
+    background: var(--color5) !important;
+    border-radius: 20px;
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+#calendar a {
+    text-decoration: none;
+    color: black;
 }
 
+.fc .fc-toolbar-title {
+    font-size: 1.5em;
+    text-transform: capitalize;
+    margin: 0px;
+}
+.fc .fc-button-primary {
+    background: none;
+    border: none;
+    color: var(--color1);
+    font-weight: bold;
+}
+.fc .fc-button-primary:disabled {
+    background: none;
+    border: none;
+    color: var(--color1);
+}
+.fc .fc-daygrid-day-frame {
+    min-height: unset !important;
+    height: 100%;
+}
+.fc .fc-daygrid-day-top {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events, .fc-daygrid-day-bg {
+    display: none !important;
+}
