@@ -176,6 +176,7 @@ $(document).ready(function () {
       horaire: "16h 00 - 16h 30", 
     },
   ];
+  
   const Historiques = [
     { title: "Réunion Projet", start: "2025-02-24T10:00:00", timeStart: "10h 00", timeEnd: "11h 10" },
     { title: "Meetup Python", start: "2025-02-24T19:00:00", timeStart: "19h 00", timeEnd: "21h 30" },
@@ -194,6 +195,17 @@ $(document).ready(function () {
     { title: "Cours Blockchain", start: "2025-03-10T14:00:00", timeStart: "14h 00", timeEnd: "16h 00" },
 ];
 
+const DocData = [
+  {name: "Blood report", date : "May 14, 2023. 13:25 PM", isfavory: false,},
+  {name: "Dr. Inglais Prescription", date : "May 14, 2023. 13:25 PM",isfavory: true,},
+  {name: "Blood report", date : "May 14, 2023. 13:25 PM",isfavory: false,},
+  {name: "Dr. Inglais Prescription", date : "May 14, 2023. 13:25 PM",isfavory: false,},
+  {name: "Blood report", date : "May 14, 2023. 13:25 PM",isfavory: true,},
+  {name: "Dr. Inglais Prescription", date : "May 14, 2023. 13:25 PM",isfavory: false,},
+  {name: "Dr. Inglais Prescription", date : "May 14, 2023. 13:25 PM",isfavory: true,},
+]
+
+  Documents.display(DocData);
 
   Historique.init(Historiques);
   Calandar.rendezVous(events);
@@ -492,6 +504,19 @@ var HistoriqueFunctions = {
   }
 };
 
+const Documents = {
+  display : function(Documents) {
+    const $wrapperDoc = $('#list_documents');
+    
+    Documents.forEach((doc) => {
+      const doctorName = doc.name;
+      const date = doc.date;
+      const isfavory = doc.isfavory;
+      $wrapperDoc.append(Templante.eachDocument(doctorName, date, isfavory))
+    })
+  }
+}
+
 
 const Filter = {
   displayFilterEvents: function (month, year, events) {
@@ -551,6 +576,7 @@ const Templante = {
       </li>
     `
   },
+
   EachHistorique : function(Historique) {
     return `
                     <div class="card-body d-flex align-items-center gap-3">
@@ -562,6 +588,42 @@ const Templante = {
                         ${Historique.timeStart} - ${Historique.timeEnd}
                     </div>
                 `
+  },
+
+  eachDocument : function(name , date, isfavory) {
+    var classFavory = isfavory ? "bi bi-star-fill text-warning" : "bi bi-star";
+    
+    return `
+      <div class="col-md-3">
+          <div class="card rounded-4 my-2 ">
+              <div class=" d-flex justify-content-between p-2 pb-0">
+                  <div id="document-favory" class="">
+                      <i class="${classFavory}"></i>
+                      <!-- <i class="bi bi-star-fill text-warning"></i> -->
+                  </div>
+                  <div class="dropdown">
+                      <a class="fs-5" href="#" role="button" id="dropdownMenuLink"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          &#8942;
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <li><a class="dropdown-item" href="#">Editer</a></li>
+                          <li><a class="dropdown-item" href="#">Supprimer</a></li>
+                      </ul>
+                  </div>
+
+              </div>
+              <div class="d-flex justify-content-center align-items-center border-bottom">
+                  <img src="./assets/images/document.png" alt="document" class=" rounded-4">
+              </div>
+              <div class="card-body text-center">
+                  <h6 class="card-title">${name}</h6>
+                  <p class="card-text fs-14-px opacity-50">${date}</p>
+              </div>
+          </div>
+          
+      </div>
+    `
   }
 
 

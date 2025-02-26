@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
 
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -52,7 +52,8 @@
             <div class="offcanvas-body">
                 <ul class="list-unstyled list-group  d-flex justify-content-between h-25">
                     <li class="list-group-item border-0 shadow opacity-75">
-                        <a href="./acceuil_apres_premier_login.html" class="text-decoration-none text-reset opacity-75 fs-14-px">
+                        <a href="./acceuil_apres_premier_login.html"
+                            class="text-decoration-none text-reset opacity-75 fs-14-px">
                             <i class="bi bi-speedometer2 fs-5 mx-1"></i>
                             <span>Tableau de bord</span>
                         </a>
@@ -97,11 +98,13 @@
             <div class="col-lg-2 border nav-bar-lateral">
                 <div class="h-100  d-none d-lg-block position-fixed" style="min-width: 100px; height: 100vh;">
                     <div class="my-5 mt-3">
-                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG</h5>
+                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG
+                        </h5>
                     </div>
                     <ul class="list-unstyled list-group  d-flex justify-content-between h-25">
                         <li class="list-group-item border-0 shadow opacity-75">
-                            <a href="./acceuil_apres_premier_login.html" class="text-decoration-none text-reset opacity-75 fs-14-px">
+                            <a href="./acceuil_apres_premier_login.html"
+                                class="text-decoration-none text-reset opacity-75 fs-14-px">
                                 <i class="bi bi-speedometer2 fs-5 mx-1"></i>
                                 <span>Tableau de bord</span>
                             </a>
@@ -137,13 +140,90 @@
                 </div>
 
             </div>
-            
 
-            <div class="col-lg-10 p-3">
-                DOCUMENTS
+
+            <div class="col-lg-10 p-4">
+                <!--search bar-->
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-6 my-3 order-0 order-lg-0 d-none d-md-block">
+                        <p class="opacity-75 m-0">Salut, Stevan dux</p>
+                        <h5 class="fw-bold m-0 fs-4">Document du patient</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 order-1 order-lg-2">
+                        <div class="d-flex justify-content-around align-items-center gap-2">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    fr
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Mg</a></li>
+                                    <li><a class="dropdown-item" href="#">Eng</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="notif">
+                                <i class="bi bi-bell fs-4"></i>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center gap-1">
+                                <div class="img"><img src="./assets/images/profile.png" alt="profile user"></div>
+                                <p class="m-0">Stevan dux</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--DOCUMENTs-->
+                <div class="row">
+                    <div class="bg-white rounded-3 border-1 my-3 py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>Documents</h4>
+                            <div class="d-flex gap-3 justify-content-center align-items-center">
+                                <button id="addEventBtn" class="btn btn-primary">
+                                    <i class="bi bi-plus-square mx-1"></i>
+                                    Nouveau rendez-vous
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row my-3" id="list_documents">
+                            <div class="col-md-3">
+                                <div class="card rounded-4 my-2 ">
+                                    <div class=" d-flex justify-content-between p-2 pb-0">
+                                        <div id="document-favory" class="">
+                                            <i class="bi bi-star"></i>
+                                            <!-- <i class="bi bi-star-fill text-warning"></i> -->
+                                        </div>
+                                        <div class="dropdown">
+                                            <a class="fs-5" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                &#8942;
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li><a class="dropdown-item" href="#">Editer</a></li>
+                                                <li><a class="dropdown-item" href="#">Supprimer</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center border-bottom">
+                                        <img src="./assets/images/document.png" alt="document" class=" rounded-4">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title">Dr. Inglais Prescription</h6>
+                                        <p class="card-text fs-14-px opacity-50">May 14, 2023. 13:25 PM</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-        
+
     </main>
 
 
@@ -159,8 +239,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
+
 
     <script src="./assets/js/main.js"></script>
 

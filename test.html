@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Événements du Mois</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/fr.js"></script>
+    <style>
+        /* Styles existants */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        #eventList {
+            max-width: 800px;
+            margin: auto;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-day {
+            margin-top: 10px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .event-list-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            padding: 10px;
+        }
+
+        .event-item {
+            padding: 8px 12px;
+            border-radius: 5px;
+            background: #e9ecef;
+            margin: 5px;
+            text-align: center;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .today-events {
+            display: flex;
+            flex-direction: column;
+        }
+
+        select {
+            padding: 8px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        /* Styles de la modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Événements du Mois</h2>
+
+    <label for="monthSelect">Mois :</label>
+    <select id="monthSelect"></select>
+
+    <label for="yearSelect">Année :</label>
+    <select id="yearSelect"></select>
+
+    <button id="addEventBtn">Ajouter un Événement</button>
+
+    <div id="eventList"></div>
+
+    <!-- Modale pour créer un événement -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Créer un Nouvel Événement</h2>
+            <label for="eventTitle">Titre :</label>
+            <input type="text" id="eventTitle" required>
+            <label for="eventDate">Date et Heure :</label>
+            <input type="datetime-local" id="eventDate" required>
+            <button id="saveEventBtn">Enregistrer</button>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let events = [
+                { title: "Réunion Projet", start: "2025-02-24T10:00:00" },
+                { title: "Conférence Dev", start: "2025-02-25T14:00:00" },
+                { title: "Formation React", start: "2025-02-26T09:00:00" },
+                { title: "Hackathon", start: "2025-02-28T08:00:00" },
+                { title: "Meetup JS", start: "2025-02-28T18:30:00" }
+            ];
+            Historique.init(events);
+        });
+    
+        var Historique = {
+            events: [],
+    
+            init: function (events) {
+                this.events = events;
+                HistoriqueFunctions.cacheDOM();
+                HistoriqueFunctions.bindEvents();
+                HistoriqueFunctions.populateMonthAndYear();
+                HistoriqueFunctions.updateEventList(this.events);
+            }
+        };
+    
+        var HistoriqueFunctions = {
+            cacheDOM: function () {
+                this.$eventList = $("#eventList");
+                this.$monthSelect = $("#monthSelect");
+                this.$yearSelect = $("#yearSelect");
+                this.$addEventBtn = $("#addEventBtn");
+                this.$eventModal = $("#eventModal");
+                this.$closeModal = $(".close");
+                this.$saveEventBtn = $("#saveEventBtn");
+                this.$eventTitleInput = $("#eventTitle");
+                this.$eventDateInput = $("#eventDate");
+                this.currentDate = new Date();
+            },
+    
+            bindEvents: function () {
+                this.$addEventBtn.on("click", this.showModal.bind(this));
+                this.$closeModal.on("click", this.hideModal.bind(this));
+                this.$saveEventBtn.on("click", this.saveEvent.bind(this));
+                this.$monthSelect.on("change", () => this.updateEventList(Historique.events));
+                this.$yearSelect.on("change", () => this.updateEventList(Historique.events));
+            },
+    
+            populateMonthAndYear: function () {
+                const months = [
+                    "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+                ];
+    
+                $.each(months, (i, month) => {
+                    this.$monthSelect.append(`<option value="${i}">${month}</option>`);
+                });
+    
+                const currentYear = new Date().getFullYear();
+                for (let i = currentYear - 2; i <= currentYear + 2; i++) {
+                    this.$yearSelect.append(`<option value="${i}">${i}</option>`);
+                }
+    
+                this.$monthSelect.val(this.currentDate.getMonth());
+                this.$yearSelect.val(this.currentDate.getFullYear());
+            },
+    
+            getFormattedDate: function (eventDate) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+    
+                const tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate() + 1);
+    
+                const yesterday = new Date(today);
+                yesterday.setDate(today.getDate() - 1);
+    
+                eventDate.setHours(0, 0, 0, 0);
+    
+                if (eventDate.getTime() === today.getTime()) return "Aujourd'hui";
+                if (eventDate.getTime() === tomorrow.getTime()) return "Demain";
+                if (eventDate.getTime() === yesterday.getTime()) return "Hier";
+    
+                return eventDate.toLocaleDateString("fr-FR", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            },
+    
+            updateEventList: function (events) {
+                var selectedMonth = parseInt(this.$monthSelect.val());
+                var selectedYear = parseInt(this.$yearSelect.val());
+    
+                var filteredEvents = events.filter(event => {
+                    var eventDate = new Date(event.start);
+                    return eventDate.getMonth() === selectedMonth && eventDate.getFullYear() === selectedYear;
+                });
+    
+                filteredEvents.sort((a, b) => new Date(a.start) - new Date(b.start));
+    
+                this.$eventList.empty();
+    
+                if (filteredEvents.length === 0) {
+                    this.$eventList.html("<p>Aucun événement ce mois-ci.</p>");
+                    return;
+                }
+    
+                let groupedEvents = {};
+                $.each(filteredEvents, (_, event) => {
+                    let eventDate = new Date(event.start);
+                    let formattedDate = this.getFormattedDate(eventDate);
+    
+                    if (!groupedEvents[formattedDate]) {
+                        groupedEvents[formattedDate] = [];
+                    }
+                    groupedEvents[formattedDate].push(event);
+                });
+    
+                let sortedDates = Object.keys(groupedEvents).sort((a, b) => {
+                    let dateA = new Date(a === "Aujourd'hui" ? new Date() : a === "Demain" ? new Date().setDate(new Date().getDate() + 1) : a === "Hier" ? new Date().setDate(new Date().getDate() - 1) : a);
+                    let dateB = new Date(b === "Aujourd'hui" ? new Date() : b === "Demain" ? new Date().setDate(new Date().getDate() + 1) : b === "Hier" ? new Date().setDate(new Date().getDate() - 1) : b);
+                    return dateA - dateB;
+                });
+    
+                $.each(sortedDates, (_, date) => {
+                    let $dateHeader = $("<div>").addClass("event-day").text(date);
+                    this.$eventList.append($dateHeader);
+    
+                    let $eventContainer = $("<div>").addClass("event-list-container");
+                    if (date === "Aujourd'hui") $eventContainer.addClass("today-events");
+    
+                    $.each(groupedEvents[date], (_, event) => {
+                        let eventTime = new Date(event.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+                        let $eventItem = $("<div>").addClass("event-item").html(`<strong>${event.title}</strong> - ${eventTime}`);
+                        $eventContainer.append($eventItem);
+                    });
+    
+                    this.$eventList.append($eventContainer);
+                });
+            },
+    
+            showModal: function () {
+                this.$eventModal.show();
+                this.$eventTitleInput.val("");
+                this.$eventDateInput.val("");
+            },
+    
+            hideModal: function () {
+                this.$eventModal.hide();
+            },
+    
+            saveEvent: function () {
+                const title = this.$eventTitleInput.val();
+                const date = new Date(this.$eventDateInput.val());
+                const now = new Date();
+    
+                if (title && this.$eventDateInput.val()) {
+                    if (date < now) {
+                        alert("Vous ne pouvez pas ajouter un événement à une date passée.");
+                    } else {
+                        Historique.events.push({ title: title, start: date.toISOString() });
+                        this.updateEventList(Historique.events);
+                        this.hideModal();
+                    }
+                } else {
+                    alert("Veuillez remplir tous les champs.");
+                }
+            }
+        };
+    
+    </script>
+    
+    
+
+</body>
+
+</html>

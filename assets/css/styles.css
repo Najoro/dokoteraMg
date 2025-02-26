@@ -202,12 +202,6 @@ button.iti__selected-country{
 
 /*Historique --------------------------------------------------*/
  /* Styles existants */
- body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
-    background: #f8f9fa;
-}
 
 .event-day {
     font-size: 14px;
@@ -296,3 +290,5 @@ select {
     text-decoration: none;
     cursor: pointer;
 }
+
+/*document -----------------------------*/
