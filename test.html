@@ -1,317 +1,249 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Événements du Mois</title>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/fr.js"></script>
+    <title>Filtrer événements par mois</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Styles existants */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            text-align: center;
-            background: #f8f9fa;
-        }
-
-        #eventList {
-            max-width: 800px;
-            margin: auto;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .event-day {
-            margin-top: 10px;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            font-weight: bold;
-            border-radius: 5px;
-            text-align: left;
-        }
-
-        .event-list-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            padding: 10px;
-        }
-
-        .event-item {
-            padding: 8px 12px;
-            border-radius: 5px;
-            background: #e9ecef;
-            margin: 5px;
-            text-align: center;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-        .today-events {
-            display: flex;
-            flex-direction: column;
-        }
-
-        select {
-            padding: 8px;
-            margin: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        /* Styles de la modale */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
+        .status-btn {
+            border: 1px solid #ccc;
+            background: transparent;
             color: black;
-            text-decoration: none;
-            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
+
+        .status-btn.active {
+            background: white;
+            border: none;
+            box-shadow: none;
+        }
+
     </style>
 </head>
+<body class="container py-4">
 
-<body>
+    <h2 class="mb-4">Filtrer les événements par mois</h2>
 
-    <h2>Événements du Mois</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Boutons à gauche -->
+        <div class="d-flex gap-2">
+            <button class="status-btn" id="btnNext" onclick="consultations.filterByStatus(0)">Prochains</button>
+            <button class="status-btn" id="btnPast" onclick="consultations.filterByStatus(1)">Passés</button>
+            <button class="status-btn" id="btnCancelled" onclick="consultations.filterByStatus(2)">Annulés</button>
+        </div>
+    
+        <!-- Sélecteur de mois et bouton à droite -->
+        <div class="d-flex gap-2">
+            <select id="monthSelect" class="form-select w-auto">
+                <option value="">-- Tous les mois --</option>
+            </select>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Ajouter un événement</button>
+        </div>
+    </div>
+    
 
-    <label for="monthSelect">Mois :</label>
-    <select id="monthSelect"></select>
+    <ul id="eventList" class="list-group mt-4"></ul>
 
-    <label for="yearSelect">Année :</label>
-    <select id="yearSelect"></select>
-
-    <button id="addEventBtn">Ajouter un Événement</button>
-
-    <div id="eventList"></div>
-
-    <!-- Modale pour créer un événement -->
-    <div id="eventModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Créer un Nouvel Événement</h2>
-            <label for="eventTitle">Titre :</label>
-            <input type="text" id="eventTitle" required>
-            <label for="eventDate">Date et Heure :</label>
-            <input type="datetime-local" id="eventDate" required>
-            <button id="saveEventBtn">Enregistrer</button>
+    <!-- Modal d'ajout ou de modification d'événement -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalLabel">Ajouter un événement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="mb-3">
+                            <label for="eventTitle" class="form-label">Nom de l'événement</label>
+                            <input type="text" class="form-control" id="eventTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="eventDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDoctor" class="form-label">Docteur</label>
+                            <input type="text" class="form-control" id="eventDoctor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventTime" class="form-label">Horaire (HHhMM - HHhMM)</label>
+                            <input type="text" class="form-control" id="eventTime" placeholder="Ex: 10h20 - 10h45" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventStatus" class="form-label">Statut</label>
+                            <select id="eventStatus" class="form-select" required>
+                                <option value="0">Prochain</option>
+                                <option value="1">Passé</option>
+                                <option value="2">Annulé</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Ajouter</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
     <script>
-        $(document).ready(function () {
-            let events = [
-                { title: "Réunion Projet", start: "2025-02-24T10:00:00" },
-                { title: "Conférence Dev", start: "2025-02-25T14:00:00" },
-                { title: "Formation React", start: "2025-02-26T09:00:00" },
-                { title: "Hackathon", start: "2025-02-28T08:00:00" },
-                { title: "Meetup JS", start: "2025-02-28T18:30:00" }
-            ];
-            Historique.init(events);
-        });
-    
-        var Historique = {
+        const consultations = {
             events: [],
-    
-            init: function (events) {
-                this.events = events;
-                HistoriqueFunctions.cacheDOM();
-                HistoriqueFunctions.bindEvents();
-                HistoriqueFunctions.populateMonthAndYear();
-                HistoriqueFunctions.updateEventList(this.events);
-            }
-        };
-    
-        var HistoriqueFunctions = {
-            cacheDOM: function () {
-                this.$eventList = $("#eventList");
-                this.$monthSelect = $("#monthSelect");
-                this.$yearSelect = $("#yearSelect");
-                this.$addEventBtn = $("#addEventBtn");
-                this.$eventModal = $("#eventModal");
-                this.$closeModal = $(".close");
-                this.$saveEventBtn = $("#saveEventBtn");
-                this.$eventTitleInput = $("#eventTitle");
-                this.$eventDateInput = $("#eventDate");
-                this.currentDate = new Date();
+
+            init(events) {
+                this.events = events; // Assigner les événements
+                this.updateMonthFilter();
+                this.displayEvents();
+                this.bindEvents();
+                // Mettre le statut par défaut à "Prochains"
+                this.setActiveStatusButton(0);
             },
-    
-            bindEvents: function () {
-                this.$addEventBtn.on("click", this.showModal.bind(this));
-                this.$closeModal.on("click", this.hideModal.bind(this));
-                this.$saveEventBtn.on("click", this.saveEvent.bind(this));
-                this.$monthSelect.on("change", () => this.updateEventList(Historique.events));
-                this.$yearSelect.on("change", () => this.updateEventList(Historique.events));
-            },
-    
-            populateMonthAndYear: function () {
-                const months = [
-                    "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-                    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-                ];
-    
-                $.each(months, (i, month) => {
-                    this.$monthSelect.append(`<option value="${i}">${month}</option>`);
+
+            updateMonthFilter() {
+                let months = [...new Set(this.events.map(event => event.start.slice(0, 7)))];
+                months.sort();
+
+                $("#monthSelect").empty().append('<option value="">-- Tous les mois --</option>');
+                months.forEach(month => {
+                    let [year, mon] = month.split("-");
+                    let monthName = new Date(year, mon - 1).toLocaleString("fr-FR", { month: "long", year: "numeric" });
+                    $("#monthSelect").append(`<option value="${month}">${monthName}</option>`);
                 });
-    
-                const currentYear = new Date().getFullYear();
-                for (let i = currentYear - 2; i <= currentYear + 2; i++) {
-                    this.$yearSelect.append(`<option value="${i}">${i}</option>`);
+            },
+
+            displayEvents(month = "", status = null) {
+                $("#eventList").empty();
+                let filteredEvents = this.events;
+
+                if (status !== null) {
+                    filteredEvents = this.events.filter(event => event.status === status);
                 }
-    
-                this.$monthSelect.val(this.currentDate.getMonth());
-                this.$yearSelect.val(this.currentDate.getFullYear());
-            },
-    
-            getFormattedDate: function (eventDate) {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-    
-                const tomorrow = new Date(today);
-                tomorrow.setDate(today.getDate() + 1);
-    
-                const yesterday = new Date(today);
-                yesterday.setDate(today.getDate() - 1);
-    
-                eventDate.setHours(0, 0, 0, 0);
-    
-                if (eventDate.getTime() === today.getTime()) return "Aujourd'hui";
-                if (eventDate.getTime() === tomorrow.getTime()) return "Demain";
-                if (eventDate.getTime() === yesterday.getTime()) return "Hier";
-    
-                return eventDate.toLocaleDateString("fr-FR", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            },
-    
-            updateEventList: function (events) {
-                var selectedMonth = parseInt(this.$monthSelect.val());
-                var selectedYear = parseInt(this.$yearSelect.val());
-    
-                var filteredEvents = events.filter(event => {
-                    var eventDate = new Date(event.start);
-                    return eventDate.getMonth() === selectedMonth && eventDate.getFullYear() === selectedYear;
-                });
-    
-                filteredEvents.sort((a, b) => new Date(a.start) - new Date(b.start));
-    
-                this.$eventList.empty();
-    
+
+                if (month) {
+                    filteredEvents = filteredEvents.filter(event => event.start.startsWith(month));
+                }
+
                 if (filteredEvents.length === 0) {
-                    this.$eventList.html("<p>Aucun événement ce mois-ci.</p>");
-                    return;
-                }
-    
-                let groupedEvents = {};
-                $.each(filteredEvents, (_, event) => {
-                    let eventDate = new Date(event.start);
-                    let formattedDate = this.getFormattedDate(eventDate);
-    
-                    if (!groupedEvents[formattedDate]) {
-                        groupedEvents[formattedDate] = [];
-                    }
-                    groupedEvents[formattedDate].push(event);
-                });
-    
-                let sortedDates = Object.keys(groupedEvents).sort((a, b) => {
-                    let dateA = new Date(a === "Aujourd'hui" ? new Date() : a === "Demain" ? new Date().setDate(new Date().getDate() + 1) : a === "Hier" ? new Date().setDate(new Date().getDate() - 1) : a);
-                    let dateB = new Date(b === "Aujourd'hui" ? new Date() : b === "Demain" ? new Date().setDate(new Date().getDate() + 1) : b === "Hier" ? new Date().setDate(new Date().getDate() - 1) : b);
-                    return dateA - dateB;
-                });
-    
-                $.each(sortedDates, (_, date) => {
-                    let $dateHeader = $("<div>").addClass("event-day").text(date);
-                    this.$eventList.append($dateHeader);
-    
-                    let $eventContainer = $("<div>").addClass("event-list-container");
-                    if (date === "Aujourd'hui") $eventContainer.addClass("today-events");
-    
-                    $.each(groupedEvents[date], (_, event) => {
-                        let eventTime = new Date(event.start).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-                        let $eventItem = $("<div>").addClass("event-item").html(`<strong>${event.title}</strong> - ${eventTime}`);
-                        $eventContainer.append($eventItem);
-                    });
-    
-                    this.$eventList.append($eventContainer);
-                });
-            },
-    
-            showModal: function () {
-                this.$eventModal.show();
-                this.$eventTitleInput.val("");
-                this.$eventDateInput.val("");
-            },
-    
-            hideModal: function () {
-                this.$eventModal.hide();
-            },
-    
-            saveEvent: function () {
-                const title = this.$eventTitleInput.val();
-                const date = new Date(this.$eventDateInput.val());
-                const now = new Date();
-    
-                if (title && this.$eventDateInput.val()) {
-                    if (date < now) {
-                        alert("Vous ne pouvez pas ajouter un événement à une date passée.");
-                    } else {
-                        Historique.events.push({ title: title, start: date.toISOString() });
-                        this.updateEventList(Historique.events);
-                        this.hideModal();
-                    }
+                    $("#eventList").append("<li class='list-group-item text-muted'>Aucun événement trouvé.</li>");
                 } else {
-                    alert("Veuillez remplir tous les champs.");
+                    let currentMonth = "";
+                    filteredEvents.forEach(event => {
+                        let eventMonth = event.start.slice(0, 7);
+                        if (eventMonth !== currentMonth) {
+                            let monthName = new Date(eventMonth + "-01").toLocaleString("fr-FR", { month: "long", year: "numeric" });
+                            $("#eventList").append(`<li class="list-group-item list-group-item-secondary"><strong>${monthName}</strong></li>`);
+                            currentMonth = eventMonth;
+                        }
+                        $("#eventList").append(`
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${event.title}</strong> (${event.start})<br>
+                                    <span class="text-muted">Docteur: ${event.docteur} | Horaire: ${event.horaire}</span>
+                                </div>
+                                <button class="btn btn-warning btn-sm" onclick="consultations.openEditModal('${event.id}')">Modifier</button>
+                            </li>
+                        `);
+                    });
                 }
+            },
+
+            openEditModal(eventId) {
+                const eventToEdit = this.events.find(event => event.id === eventId);
+                $("#eventTitle").val(eventToEdit.title);
+                $("#eventDate").val(eventToEdit.start);
+                $("#eventDoctor").val(eventToEdit.docteur);
+                $("#eventTime").val(eventToEdit.horaire);
+                $("#eventStatus").val(eventToEdit.status);
+                $("#eventModalLabel").text("Modifier l'événement");
+                $("#eventForm").off("submit").on("submit", (e) => {
+                    e.preventDefault();
+                    eventToEdit.title = $("#eventTitle").val().trim();
+                    eventToEdit.start = $("#eventDate").val();
+                    eventToEdit.docteur = $("#eventDoctor").val().trim();
+                    eventToEdit.horaire = $("#eventTime").val().trim();
+                    eventToEdit.status = Number($("#eventStatus").val());
+                    this.updateMonthFilter();
+                    this.displayEvents($("#monthSelect").val(), null);
+                    $("#eventForm")[0].reset();
+                    $("#eventModal").modal("hide");
+                });
+                $("#eventModal").modal("show");
+            },
+
+            filterByStatus(status) {
+                this.displayEvents($("#monthSelect").val(), status);
+                this.setActiveStatusButton(status);
+            },
+
+            setActiveStatusButton(status) {
+                $(".status-btn").removeClass("active");
+                if (status === 0) {
+                    $("#btnNext").addClass("active");
+                } else if (status === 1) {
+                    $("#btnPast").addClass("active");
+                } else if (status === 2) {
+                    $("#btnCancelled").addClass("active");
+                }
+            },
+
+            bindEvents() {
+                $("#monthSelect").change(() => {
+                    this.displayEvents($(this).val(), null);
+                });
+
+                $("#eventForm").submit((e) => {
+                    e.preventDefault();
+                    let title = $("#eventTitle").val().trim();
+                    let date = $("#eventDate").val();
+                    let docteur = $("#eventDoctor").val().trim();
+                    let horaire = $("#eventTime").val().trim();
+                    let status = Number($("#eventStatus").val());
+
+                    if (title && date && docteur && horaire) {
+                        let newEvent = { id: String(this.events.length + 1), title, start: date, docteur, horaire, status };
+                        this.events.push(newEvent);
+                        this.updateMonthFilter();
+                        this.displayEvents($("#monthSelect").val(), null);
+
+                        // Réinitialiser le formulaire et fermer la modal
+                        $("#eventForm")[0].reset();
+                        $("#eventModal").modal("hide");
+                    }
+                });
             }
         };
-    
+
+        $(document).ready(function() {
+            const events = [
+    { id: "1", title: "Consultation", start: "2025-03-05", docteur: "Dr. Benja", horaire: "09h00 - 09h30", status: 0 },
+    { id: "2", title: "Médicament", start: "2025-03-10", docteur: "Dr. Alice", horaire: "10h00 - 10h30", status: 1 },
+    { id: "3", title: "Radio", start: "2025-06-15", docteur: "Dr. Paul", horaire: "11h15 - 11h45", status: 0 },
+    { id: "4", title: "Échographie", start: "2025-09-08", docteur: "Dr. Chloé", horaire: "12h30 - 13h00", status: 2 },
+    { id: "5", title: "Analyse sanguine", start: "2025-04-22", docteur: "Dr. Léo", horaire: "08h45 - 09h15", status: 0 },
+    { id: "6", title: "Vaccination", start: "2025-07-01", docteur: "Dr. Karim", horaire: "10h00 - 10h30", status: 2 },
+    { id: "7", title: "Consultation", start: "2025-02-18", docteur: "Dr. Emma", horaire: "09h30 - 10h00", status: 1 },
+    { id: "8", title: "IRM", start: "2025-05-14", docteur: "Dr. Sofiane", horaire: "14h00 - 14h45", status: 0 },
+    { id: "9", title: "Scanner", start: "2025-08-20", docteur: "Dr. Victor", horaire: "16h00 - 16h30", status: 1 },
+    { id: "10", title: "Consultation", start: "2025-01-30", docteur: "Dr. Camille", horaire: "15h00 - 15h30", status: 2 },
+    { id: "11", title: "Opération mineure", start: "2025-03-12", docteur: "Dr. Olivia", horaire: "17h00 - 17h45", status: 0 },
+    { id: "12", title: "Consultation dermatologique", start: "2025-09-25", docteur: "Dr. Martin", horaire: "13h30 - 14h00", status: 1 },
+    { id: "13", title: "Suivi post-opératoire", start: "2025-06-03", docteur: "Dr. Anaïs", horaire: "11h45 - 12h15", status: 2 },
+    { id: "14", title: "Bilan de santé", start: "2025-10-10", docteur: "Dr. Julien", horaire: "09h15 - 09h45", status: 0 },
+    { id: "15", title: "Consultation cardiologique", start: "2025-04-28", docteur: "Dr. Thomas", horaire: "08h30 - 09h00", status: 1 },
+    { id: "16", title: "Chirurgie ambulatoire", start: "2025-07-12", docteur: "Dr. Clara", horaire: "14h30 - 15h15", status: 0 },
+    { id: "17", title: "Vaccination grippe", start: "2025-12-05", docteur: "Dr. Richard", horaire: "10h15 - 10h45", status: 2 },
+    { id: "18", title: "Test d'effort", start: "2025-08-29", docteur: "Dr. Nadia", horaire: "16h15 - 16h45", status: 0 },
+    { id: "19", title: "Consultation neurologique", start: "2025-11-18", docteur: "Dr. François", horaire: "15h45 - 16h15", status: 1 },
+    { id: "20", title: "Échographie abdominale", start: "2025-05-09", docteur: "Dr. Sophie", horaire: "12h00 - 12h30", status: 2 },
+];
+
+            consultations.init(events); // Passer les événements à init
+        });
     </script>
-    
-    
 
 </body>
-
 </html>

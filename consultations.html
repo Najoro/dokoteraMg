@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avant Login</title>
+    <title>Consultations</title>
 
     <!--STYLES DEPENDANCE-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,11 +20,13 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
-<body class="ff-inter-normal">
+<body class="ff-inter-normal consultations-page">
     <!-- Navbar Start -->
     <nav class="navbar navbar-white bg-white p-2 border-bottom d-block d-lg-none">
         <div class="container-fluid ">
@@ -47,7 +49,6 @@
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
             </div>
             <div class="offcanvas-body">
                 <ul class="list-unstyled list-group  d-flex justify-content-between h-25">
@@ -115,7 +116,7 @@
                                 <span>Tableau de bord</span>
                             </a>
                         </li>
-                        <li class="list-group-item border-0 shadow opacity-75 active">
+                        <li class="list-group-item border-0 shadow opacity-75">
                             <a href="./list_patients.html" class="text-reset text-decoration-none fs-14-px">
                                 <i class="bi bi-files fs-5 mx-1"></i>
                                 <span>Documents</span>
@@ -127,7 +128,7 @@
                                 <span> Ma disponibilité</span>
                             </a>
                         </li>
-                        <li class="list-group-item border-0 shadow opacity-75 ">
+                        <li class="list-group-item border-0 shadow opacity-75 active">
                             <a href="./consultations.html" class="text-reset text-decoration-none fs-14-px">
                                 <i class="bi bi-people  fs-5 mx-1"></i>
                                 <span>Mes consultations</span>
@@ -154,12 +155,12 @@
             </div>
 
 
-            <div class="col-lg-10 p-4">
+            <div class="col-lg-10 p-3">
                 <!--search bar-->
                 <div class="row align-items-center justify-content-between">
-                    <div class="col-md-6 my-3 order-0 order-lg-0 d-none d-md-block">
+                    <div class="col-lg-2 col-md-6 my-3 order-0 order-lg-0 d-none d-md-block">
                         <p class="opacity-75 m-0">Salut, Stevan dux</p>
-                        <h5 class="fw-bold m-0 fs-4">Document du patient</h5>
+                        <h5 class="fw-bold m-0 fs-4">Consultations</h5>
                     </div>
                     <div class="col-lg-3 col-md-6 order-1 order-lg-2">
                         <div class="d-flex justify-content-around align-items-center gap-2">
@@ -184,64 +185,75 @@
                         </div>
                     </div>
                 </div>
-                <!--DOCUMENTs-->
+
                 <div class="row">
-                    <div class="bg-white rounded-3 border-1 my-3 py-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4>Documents</h4>
-                            <div class="d-flex gap-3 justify-content-center align-items-center">
-                                <button id="addEventBtn" class="btn btn-primary">
-                                    <i class="bi bi-plus-square mx-1"></i>
-                                    Nouveau rendez-vous
-                                </button>
-                            </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <!-- Boutons à gauche -->
+                        <div class="d-flex gap-2">
+                            <button class="status-btn" id="btnNext" onclick="consultations.filterByStatus(0)">Prochains</button>
+                            <button class="status-btn" id="btnPast" onclick="consultations.filterByStatus(1)">Passés</button>
+                            <button class="status-btn" id="btnCancelled" onclick="consultations.filterByStatus(2)">Annulés</button>
                         </div>
-
-                        <div class="row my-3" id="list_documents">
-                            <div class="col-md-3">
-                                <div class="card rounded-4 my-2 ">
-                                    <div class=" d-flex justify-content-between p-2 pb-0">
-                                        <div id="document-favory" class="">
-                                            <i class="bi bi-star"></i>
-                                            <!-- <i class="bi bi-star-fill text-warning"></i> -->
-                                        </div>
-                                        <div class="dropdown">
-                                            <a class="fs-5" href="#" role="button" id="dropdownMenuLink"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                &#8942;
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <li><a class="dropdown-item" href="#">Editer</a></li>
-                                                <li><a class="dropdown-item" href="#">Supprimer</a></li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center border-bottom">
-                                        <img src="./assets/images/document.png" alt="document" class=" rounded-4">
-                                    </div>
-                                    <div class="card-body text-center">
-                                        <h6 class="card-title">Dr. Inglais Prescription</h6>
-                                        <p class="card-text fs-14-px opacity-50">May 14, 2023. 13:25 PM</p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-
+                    
+                        <!-- Sélecteur de mois et bouton à droite -->
+                        <div class="d-flex gap-2">
+                            <select id="monthSelect" class="form-select w-auto">
+                                <option value="">-- Tous les mois --</option>
+                            </select>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Ajouter un événement</button>
                         </div>
-
                     </div>
+                    
+                    <ul id="eventList" class="list-unstyled mt-4"></ul>
                 </div>
-
             </div>
         </div>
 
     </main>
 
-
-
-
-
+    <!--Modal-->
+    
+    <!-- Modal d'ajout ou de modification d'événement -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalLabel">Ajouter un événement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="mb-3">
+                            <label for="eventTitle" class="form-label">Nom de l'événement</label>
+                            <input type="text" class="form-control" id="eventTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDate" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="eventDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventDoctor" class="form-label">Docteur</label>
+                            <input type="text" class="form-control" id="eventDoctor" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventTime" class="form-label">Horaire (HHhMM - HHhMM)</label>
+                            <input type="text" class="form-control" id="eventTime" placeholder="Ex: 10h20 - 10h45" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="eventStatus" class="form-label">Statut</label>
+                            <select id="eventStatus" class="form-select" required>
+                                <option value="0">Prochain</option>
+                                <option value="1">Passé</option>
+                                <option value="2">Annulé</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -251,8 +263,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
-
+    <script
+        src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/fr.js"></script>
 
     <script src="./assets/js/main.js"></script>
 
