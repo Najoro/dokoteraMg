@@ -254,7 +254,7 @@ $(document).ready(function () {
       timeEnd: "16h 00",
     },
   ];
-  const DocData = [
+  const DocumentData = [
     { name: "Blood report", date: "May 14, 2023. 13:25 PM", isfavory: false },
     {
       name: "Dr. Inglais Prescription",
@@ -279,20 +279,102 @@ $(document).ready(function () {
       isfavory: true,
     },
   ];
+  const DocteurDatas = [
+    {name: "Amanda Clara", specialite: "Spécialiste", centre: "Clinique A", experience: "12 ans", dispo: "Lun, Mar", frais: "100 000", image: "amanda.png", region: "Analamanga", secteur: "Santé", ville: "Antananarivo" },
+    {name: "John Doe", specialite: "Généraliste", centre: "Hôpital B", experience: "8 ans", dispo: "Mer, Jeu", frais: "80 000", image: "jessie.png", region: "Vakinankaratra", secteur: "Hôpital", ville: "Antsirabe" },
+    {name: "Sarah Rakoto", specialite: "Dentiste", centre: "Cabinet C", experience: "5 ans", dispo: "Ven, Sam", frais: "50 000", image: "jessie.png", region: "Atsinanana", secteur: "Dentaire", ville: "Toamasina" },
+    {name: "Lucien Ravelo", specialite: "Cardiologue", centre: "Clinique D", experience: "15 ans", dispo: "Lun, Mer", frais: "150 000", image: "profile_femme.png", region: "Diana", secteur: "Cardiologie", ville: "Antsiranana" },
+    {name: "Mamy Rabe", specialite: "Pédiatre", centre: "Hôpital E", experience: "10 ans", dispo: "Jeu, Ven", frais: "90 000", image: "profile.png", region: "Sofia", secteur: "Pédiatrie", ville: "Mahajanga" },
+    {name: "Zo Razaf", specialite: "Dermatologue", centre: "Cabinet F", experience: "7 ans", dispo: "Sam, Dim", frais: "70 000", image: "amanda.png", region: "Itasy", secteur: "Dermatologie", ville: "Miarinarivo" },
+    {name: "Sophie Rajaon", specialite: "Gynécologue", centre: "Clinique G", experience: "20 ans", dispo: "Lun, Mar, Jeu", frais: "200 000", image: "jason.png", region: "Bongolava", secteur: "Gynécologie", ville: "Tsiroanomandidy" },
+    {name: "Patricia Andriaman", specialite: "Ophtalmologue", centre: "Centre H", experience: "5 ans", dispo: "Mer, Sam", frais: "50 000", image: "patricia.png", region: "Haute Matsiatra", secteur: "Ophtalmologie", ville: "Fianarantsoa" },
+    {name: "Rita Rahar", specialite: "Chirurgien", centre: "Clinique I", experience: "18 ans", dispo: "Lun, Vend", frais: "120 000", image: "rita.png", region: "Melaky", secteur: "Chirurgie", ville: "Morrobe" },
+    {name: "Lova Randri", specialite: "Neurologue", centre: "Hôpital J", experience: "22 ans", dispo: "Mar, Jeu, Sam", frais: "140 000", image: "lova.png", region: "Atsimo-Andrefana", secteur: "Neurologie", ville: "Toliara" }
+];
 
-  // Documents.display(DocData);
   if ($("body").hasClass("consultations-page")) {
     consultations.init(events);
+  }else if ($("body").hasClass("recherche-page")) {
+    // consultations.init(events);
+    Doctor.init(DocteurDatas);
+
   }else{
+    Documents.display(DocumentData);
     Historique.init(Historiques);
     Calandar.rendezVous(events);
     Calandar.init();
     Calandar.initialiseFullCalandar(events);
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
-
   }
 });
+
+const Doctor = {
+  data: [],
+
+  init: function(doctors) {
+      this.data = doctors;
+      this.populateFilters();
+      this.displayDoctors();
+      this.bindEvents();
+  },
+
+  displayDoctors: function(filters = {}) {
+      const list = $(".doctor-list");
+      list.empty();
+
+      const filteredDoctors = this.data.filter(doc => {
+          return (!filters.region || doc.region === filters.region) &&
+                 (!filters.ville || doc.ville === filters.ville) &&
+                 (!filters.secteur || doc.secteur === filters.secteur);
+      });
+
+      filteredDoctors.forEach(doc => {
+          list.append(Templante.eachDoctor(doc));
+      });
+  },
+
+  populateFilters: function() {
+      const regions = new Set();
+      const villes = new Set();
+      const secteurs = new Set();
+
+      this.data.forEach(doc => {
+          regions.add(doc.region);
+          villes.add(doc.ville);
+          secteurs.add(doc.secteur);
+      });
+
+      this.fillSelect("#regionFilter", regions);
+      this.fillSelect("#villeFilter", villes);
+      this.fillSelect("#secteurFilter", secteurs);
+  },
+
+  fillSelect: function(selector, values) {
+      const select = $(selector);
+      select.append([...values].map(value => `<option value="${value}">${value}</option>`));
+  },
+
+  bindEvents: function() {
+      $("#openFilter").click(() => this.showFilterModal());
+      $("#applyFilter").click(() => this.applyFilters());
+  },
+
+  showFilterModal: function() {
+      const modal = new bootstrap.Modal(document.getElementById('filterModal'));
+      modal.show();
+  },
+
+  applyFilters: function() {
+      const filters = {
+          region: $("#regionFilter").val(),
+          ville: $("#villeFilter").val(),
+          secteur: $("#secteurFilter").val()
+      };
+      this.displayDoctors(filters);
+  }
+};
+
 
 const Evenement = {
   toogleShowPassword: function () {
@@ -836,6 +918,50 @@ const Filter = {
 };
 
 const Templante = {
+  imageExists : function(imagePath) {
+    var img = new Image();
+    img.src = imagePath;
+    return img.complete && img.naturalHeight !== 0;
+  },
+
+  eachDoctor : function(doc) {
+    const imagePath = "./assets/images/" + doc.image; // Chemin de l'image
+    const image = (this.imageExists(imagePath)) ? doc.image : 'default-image.png';
+    return `<div class="col-lg-4 col-md-6">
+                    <div class="card border-1 shadow-sm m-2">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3 border-bottom pb-3">
+                                <img src="./assets/images/${image}" class="rounded-circle me-3" alt="Doctor" style="width:70px; height:70px;">
+                                <div>
+                                    <h5 class="card-title mb-0">${doc.name}</h5>
+                                    <p class="text-muted small mb-0">${doc.experience} d'expérience | ${doc.centre}</p>
+                                    <span class="badge bg-info text-white">${doc.specialite}</span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6 text-muted border-end d-flex">
+                                    <i class="bi bi-clock mx-1"></i>
+                                    <span>
+                                        <strong>${doc.dispo}</strong>
+                                        <br>
+                                        <small>10h00-13h00</small>
+                                    </span>
+                                </div>
+                                <div class=" col-6 d-flex">
+                                    <i class="bi bi-currency-exchange mx-1"></i>
+                                    <span>
+                                        <strong>${doc.frais} Ar</strong>
+                                        <br>
+                                        <small>À partir</small>
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100">Prendre rendez-vous</button>
+                        </div>
+                    </div>
+                </div>
+          `
+  },
   eachEvent: function (event) {
     const eventDate = new Date(event.start);
     const dayNumber = eventDate.getDate();
