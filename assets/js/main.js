@@ -254,6 +254,7 @@ $(document).ready(function () {
       timeEnd: "16h 00",
     },
   ];
+  
   const DocumentData = [
     { name: "Blood report", date: "May 14, 2023. 13:25 PM", isfavory: false },
     {
@@ -279,6 +280,7 @@ $(document).ready(function () {
       isfavory: true,
     },
   ];
+
   const DocteurDatas = [
     {name: "Amanda Clara", specialite: "Spécialiste", centre: "Clinique A", experience: "12 ans", dispo: "Lun, Mar", frais: "100 000", image: "amanda.png", region: "Analamanga", secteur: "Santé", ville: "Antananarivo" },
     {name: "John Doe", specialite: "Généraliste", centre: "Hôpital B", experience: "8 ans", dispo: "Mer, Jeu", frais: "80 000", image: "jessie.png", region: "Vakinankaratra", secteur: "Hôpital", ville: "Antsirabe" },
@@ -297,13 +299,14 @@ $(document).ready(function () {
   }else if ($("body").hasClass("recherche-page")) {
     // consultations.init(events);
     Doctor.init(DocteurDatas);
-
-  }else{
-    Documents.display(DocumentData);
-    Historique.init(Historiques);
+  }else if ($("body").hasClass("tableaux-de-bord-page")) {    
     Calandar.rendezVous(events);
-    Calandar.init();
     Calandar.initialiseFullCalandar(events);
+  }else if ($("body").hasClass("document-page")) { 
+    Documents.display(DocumentData);
+  }else if ($("body").hasClass("profile-page")) {     
+    Historique.init(Historiques);
+  }else{
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
   }
@@ -374,8 +377,6 @@ const Doctor = {
       this.displayDoctors(filters);
   }
 };
-
-
 const Evenement = {
   toogleShowPassword: function () {
     $("body").on("click", "#toogle-show-password", function () {
@@ -458,7 +459,6 @@ const Calandar = {
     calandarFunctions.displayTodayEvents(today);
   },
 };
-
 const calandarFunctions = {
   updateMonthYear: function (DataRendezVous) {
     const month = Calandar.currentDate.getMonth();
