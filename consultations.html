@@ -186,8 +186,8 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="row ">
+                    <div class="d-flex justify-content-between align-items-center">
                         <!-- Boutons à gauche -->
                         <div class="d-flex gap-2">
                             <button class="status-btn" id="btnNext" onclick="consultations.filterByStatus(0)">Prochains</button>
@@ -197,11 +197,19 @@
                     
                         <!-- Sélecteur de mois et bouton à droite -->
                         <div class="d-flex gap-2">
-                            <select id="monthSelect" class="form-select w-auto">
+                            <select id="monthSelect" class="w-auto btn border-black">
+                                <option value="">-- Tous les mois --</option>
+                            </select>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Ajouter un événement</button>
+                            </div>
+                        </div>
+                        <!-- <div class="d-flex">
+                            <select id="monthSelect" class="form-select w-auto btn">
                                 <option value="">-- Tous les mois --</option>
                             </select>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">Ajouter un événement</button>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <ul id="eventList" class="list-unstyled mt-4"></ul>
