@@ -317,3 +317,45 @@ select {
     border: none;
     box-shadow: none;
 }
+/* reservation etape 1 ---------------------------------------*/
+.btn-check {
+    display: none;
+}
+.btn-toggle {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 10px;
+    margin: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.253);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-check:checked + .btn-toggle {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+#newCalendar .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    margin: 0;
+}
+#newCalendar.fc .fc-button-primary {
+    background: none;
+    border: none;
+    color: var(--color1);
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.295);
+    margin: 5px;
+    border-radius: 50%;
+    padding: 5px;
+}
+#newCalendar .active-date {
+    background: var(--color2);
+}
+#newCalendar table.fc-scrollgrid-sync-table a {
+    color: red;
+    text-decoration: none;
+    color: black;
+}

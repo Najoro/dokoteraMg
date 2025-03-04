@@ -294,6 +294,7 @@ $(document).ready(function () {
     {name: "Lova Randri", specialite: "Neurologue", centre: "Hôpital J", experience: "22 ans", dispo: "Mar, Jeu, Sam", frais: "140 000", image: "lova.png", region: "Atsimo-Andrefana", secteur: "Neurologie", ville: "Toliara" }
 ];
 
+
   if ($("body").hasClass("consultations-page")) {
     consultations.init(events);
   }else if ($("body").hasClass("recherche-page")) {
@@ -306,11 +307,104 @@ $(document).ready(function () {
     Documents.display(DocumentData);
   }else if ($("body").hasClass("profile-page")) {     
     Historique.init(Historiques);
+  }else if ($("body").hasClass("new-event-page")) { 
+    console.log("Test");
+    newEvent.init()
   }else{
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
   }
 });
+
+var newEvent = {
+  $calendar: $('#newCalendar'),
+  $selectedDateEl: $('#selected-date'),
+  $hourSelectionEl: $('#hour-selection'),
+  $selectionResultEl: $('#selection-result'),
+  selectedDate: null,
+  selectedHours: [],
+
+  init: function () {
+      this.selectedDate = this.getTodayDate();
+      this.$selectedDateEl.html("Date sélectionnée : " + this.selectedDate);
+      this.generateHourCheckboxes();
+      this.initCalendar();
+      this.bindEvents();
+  },
+
+  getTodayDate: function () {
+      var today = new Date();
+      var year = today.getFullYear();
+      var month = String(today.getMonth() + 1).padStart(2, '0');
+      var day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+  },
+
+  generateHourCheckboxes: function () {
+      var hours = [];
+      for (var i = 8; i <= 18; i++) {
+          var hour = String(i).padStart(2, '0') + ":00";
+          hours.push(`
+            <label class="hour-checkbox btn-toggle" >
+              <input type="checkbox" class="hour-select" value="${hour}"> ${hour}
+            </label>`);
+      }
+      this.$hourSelectionEl.html(hours.join(''));
+      this.selectedHours = [];
+      this.bindHourSelection();
+  },
+
+  bindHourSelection: function () {
+      var self = this;
+      $(".hour-select").on("change", function () {
+          var selected = $(".hour-select:checked");
+          
+          if (selected.length > 2) {
+              var lastChecked = self.selectedHours.shift();
+              $(".hour-select[value='" + lastChecked + "']").prop("checked", false);
+          }
+          self.selectedHours.push($(this).val());
+          if (self.selectedHours.length > 2) {
+              self.selectedHours.shift();
+          }
+          self.selectedHours.sort();
+      });
+  },
+
+  initCalendar: function () {
+      var self = this;
+      var calendar = new FullCalendar.Calendar(this.$calendar[0], {
+          locale: 'fr',
+          initialView: 'dayGridMonth',
+          headerToolbar: {
+            left: 'prev',  
+            center: 'title', 
+            right: 'next' 
+          },
+          selectable: true,
+          editable: true,
+          dateClick: function (info) {
+            $('.active-date').removeClass('active-date');
+            $(info.dayEl).addClass('active-date');
+              self.selectedDate = info.dateStr;
+              self.$selectedDateEl.html("Date sélectionnée : " + self.selectedDate);
+              self.generateHourCheckboxes();
+          }
+      });
+      calendar.render();
+  },
+
+  bindEvents: function () {
+      var self = this;
+      $("#show-selection").on("click", function () {
+        if(self.selectedHours == null || self.selectedDate == null){
+          alert('Selectionner une date et l\'heur ')
+        }
+          var message = `<i class="bi bi-calendar fs-5 me-2"></i> ${self.selectedHours.join(" - ")} , ${self.selectedDate} `;
+          self.$selectionResultEl.html(message);
+      });
+  }
+};
 
 const Doctor = {
   data: [],
@@ -377,6 +471,7 @@ const Doctor = {
       this.displayDoctors(filters);
   }
 };
+
 const Evenement = {
   toogleShowPassword: function () {
     $("body").on("click", "#toogle-show-password", function () {
@@ -956,10 +1051,10 @@ const Templante = {
                                     </span>
                                 </div>
                             </div>
-                            <button class="btn btn-primary w-100">Prendre rendez-vous</button>
+                            <a href="./reservation_etape_1.html" class="btn btn-primary w-100">Prendre rendez-vous</a>
                         </div>
                     </div>
-                </div>
+            </div>
           `
   },
   eachEvent: function (event) {
