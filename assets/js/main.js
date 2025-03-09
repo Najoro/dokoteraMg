@@ -308,7 +308,6 @@ $(document).ready(function () {
   }else if ($("body").hasClass("profile-page")) {     
     Historique.init(Historiques);
   }else if ($("body").hasClass("new-event-page")) { 
-    console.log("Test");
     newEvent.init()
   }else{
     Evenement.toogleShowPassword();
