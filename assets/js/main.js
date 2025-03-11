@@ -98,8 +98,65 @@ $(document).ready(function () {
   }else if ($("body").hasClass("authentificatio-page")){
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
+    
   }
+  calendar.init();
 });
+const calendar = {
+  allowedDates: [
+    '2025-03-01',
+    '2025-03-03',
+    '2025-03-07',
+    '2025-03-11',
+    '2025-03-17',
+    '2025-03-21',
+  ],
+
+  // Méthode d'initialisation du calendrier
+  init: function() {
+    const picker = new easepick.create({
+      element: document.getElementById('datepicker'),
+      css: [
+        'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
+      ],
+      plugins: ['LockPlugin'],
+      LockPlugin: {
+        filter(date, picked) {
+          // Bloquer toutes les dates sauf celles spécifiées dans allowedDates
+          return calendar.allowedDates.includes(date.format('YYYY-MM-DD'));
+        },
+      },
+      // Affichage du calendrier directement sans champ de saisie
+      inline: true,
+    });
+  }
+};
+const Evenement = {
+  toogleShowPassword: function () {
+    $("body").on("click", "#toogle-show-password", function () {
+      const $password = $("#password");
+      const $this = $(this);
+      var icon = $this.find("i");
+
+      if ($password.attr("type") == "password") {
+        $password.attr("type", "text");
+        icon.removeClass("bi-eye-slash").addClass("bi-eye");
+      } else {
+        $password.attr("type", "password");
+        icon.removeClass("bi-eye").addClass("bi-eye-slash");
+      }
+    });
+  },
+
+  initlTelInput: function () {
+    const input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+      initialCountry: "mg",
+      separateDialCode: true,
+      loadUtils: () => import("/intl-tel-input/js/utils.js?1733756310855"), // for formatting/placeholders etc
+    });
+  },
+};
 
 //Historique
 var Historique = {
