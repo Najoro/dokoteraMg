@@ -121,124 +121,54 @@
 
 
             <div class="col-lg-10 p-3">
-                <!--search bar-->
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-lg-2 col-md-6 my-3 order-0 order-lg-0 d-none d-md-block">
-                        <p class="opacity-75 m-0">Salut, Stevan dux</p>
-                        <h5 class="fw-bold m-0 fs-4">Bon retour</h5>
-                    </div>
-                    <div class="col-lg-7 col-md-12 my-3   order-2 order-lg-1 m-auto">
-                        <div class="input-group  bg-secondary-subtle rounded-3 ">
-                            <span class="input-group-text bg-secondary-subtle" id="search"><i
-                                    class="bi bi-search"></i></span>
-                            <input type="text" class="form-control bg-secondary-subtle"
-                                placeholder="Trouver des médecins " aria-label="Example text with two button addons"
-                                aria-describedby="search">
-
-                            <span class="input-group-text bg-secondary-subtle" id="emplacement"><i
-                                    class="bi bi-geo-alt"></i></span>
-                            <select class="form-select bg-secondary-subtle" aria-label="Default select example">
-                                <option selected>Emplacement</option>
-                                <option value="1">Antananarivo</option>
-                                <option value="2">Fianarantsoa</option>
-                                <option value="3">Itaosy</option>
-                                <option value="3">Anosy</option>
-                                <option value="3">Alakamisy</option>
-                            </select>
-
-                            <div class="p-2 d-flex">
-                                <span class="input-group-text bg-secondary-subtle" id="emplacement"><i
-                                        class="bi bi-crosshair"></i></span>
-                                <button class="btn btn-primary" type="button">Recherche</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 order-1 order-lg-2">
-                        <div class="d-flex justify-content-around align-items-center gap-2">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    fr
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Mg</a></li>
-                                    <li><a class="dropdown-item" href="#">Eng</a></li>
+                <div class="container   my-4 ">
+                    <div class="p-4">
+                        <div class="row bg-white shadow rounded-2 p-3 posre">
+                            <!-- Partie Gauche -->
+                            <div class="col-md-5 border-end">
+                                <a href="./client_detail_doctor.html" class="rounded-circle border-1 bg-white mb-4"><i class="bi bi-arrow-left fs-5"></i></a>
+                                <ul class="fs-14-px opacity-75 list-unstyled">
+                                    <li class="mt-2">
+                                        <div id="new-event-doctor"><i class="bi bi-person-plus fs-5 me-2"></i> Dr. Steven John</div>
+                                    </li>
+                                    <li class="mt-2">
+                                        <div id="mew-event-time"><i class="bi bi-clock fs-5 me-2"></i>30 min</div>
+                                    </li>
+                                    <li class="mt-2">
+                                        <div id="new-event-tarif"><i class="bi bi-cash-stack fs-5 me-2"></i>Tarifs : <strong>50 000 Ar</strong></div>
+                                    </li>
+                                    <li class="mt-2">
+                                        <div id="new-event-tarif"><div id="selection-result"></div></div>
+                                    </li>
                                 </ul>
                             </div>
-
-                            <div class="notif">
-                                <i class="bi bi-bell fs-4"></i>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center gap-1">
-                                <div class="img"><img src="./assets/images/profile.png" alt="profile user"></div>
-                                <p class="m-0">Stevan dux</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="my-3 bg-linear-right rounded-4 d-flex justify-content-between">
-                    <div class="  text-white">
-                        <div class="d-flex justify-content-around align-items-center p-4 flex-column-reverse flex-md-row">
-                            <div class="w-100 w-md-50">
-                                <h3>Amanda Clara</h3>
-                                <p class="fs-14-px d-flex align-items-center gap-2">
-                                    <i class="bi bi-geo-alt fs-4"></i>2464 Royal Ln. Mesa, New Jersey 45463</p>
-                                <p><strong>Spécialiste Pédiatrique</strong>| 12 ans d’expérience </p>
-                                <p class="fs-14-px">Lorem ipsum dolor sit amet consectetur. Ultrices at purus
-                                    consectetur et. In nunc blandit est duis mauris.. Ultrices aliquam lacinia mattis
-                                    nec. Rhoncus faucibus ut.
-                                    Lorem ipsum dolor sit amet consectetur. Ultrices at purus consectetur et. In nunc
-                                    blandit est duis mauris.. Ultrices aliquam lacinia mattis nec. Rhoncus faucibus ut.
-                                </p>
-                            </div>
-                            <div class="">
-                                <img src="./assets/images/profile-cercle.png" class="img-cercle" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7  justify-content-around align-items-center">
-                            <div class="container mt-3">
-                                <div class="card text-center rounded-4">
-                                    <div class="card-header">
-                                        <h3>Disponibilité</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="calendar-container" id="datepicker"></div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="container mt-3 h-100 d-flex justify-content-md-around flex-column">
-                            <div class="card text-center rounded-4">
-                                <div class="card-body">
-                                    <div class="fw-bold fs-4 mb-2">Tarifs</div>
-                                    <div class="row">
-                                        <div class="col border-end">
-                                            <h5 class="fw-semibold border-bottom border-top pt-3">Consultations</h5>
-                                            <div class="d-flex justify-content-center align-items-center gap-2 my-3">
-                                                <img src="./assets/images/money.png" alt="Icone pièce" width="30">
-                                                <p class="fs-5 fw-semibold m-0">$25</p>
+            
+                            <!-- Partie Droite -->
+                            <div class="col-md-7">
+                                <h6>Sélectionnez la date et l'heure</h6>
+                                <div class="w-100 d-flex justify-content-center my-2">
+                                    <div class="container mt-3">
+                                        <div class="card text-center rounded-4">
+                                            <div class="card-body">
+                                                <div class="calendar-container" id="datepicker"></div>
                                             </div>
-                                            <p class="text-muted">À partir</p>
-                                        </div>
-                                        <div class="col">
-                                            <h5 class="fw-semibold border-bottom border-top pt-3">Déplacement</h5>
-                                            <div class="d-flex justify-content-center align-items-center gap-2 my-3">
-                                                <img src="./assets/images/money.png" alt="Icone pièce" width="30">
-                                                <p class="fs-5 fw-semibold m-0">$25</p>
-                                            </div>
-                                            <p class="text-muted">À partir</p>
                                         </div>
                                     </div>
                                 </div>
+                                <div id="selected-date" class="my-2"> jeudi 10 août</div>
+                                <div id="hour-selection">
+                                    <div class="card-select-hour">10:30</div>
+                                    <div class="card-select-hour">11:30am</div>
+                                    <div class="card-select-hour">14:30</div>
+                                    <div class="card-select-hour">18:30</div>
+                                    <div class="card-select-hour">14:30</div>
+                                    <div class="card-select-hour">17:30</div>
+                                    <div class="card-select-hour">11:30</div>
+                                </div>
                             </div>
-                            <div class="my-3 d-flex justify-content-center">
-                                <a href="./reservation_etape_1.html" class="btn btn-primary w-75">Prendre rendez-vous</a>
-                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <a href="./reservation_etape_2.html" id="show-selection" class="btn btn-primary my-4 px-5">Suivant</a>
                         </div>
                     </div>
                 </div>

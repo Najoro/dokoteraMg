@@ -95,10 +95,9 @@ $(document).ready(function () {
 
  if ($("body").hasClass("profile-page")) {     
     Historique.init(Historiques);
-  }else if ($("body").hasClass("authentificatio-page")){
+  }else{
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
-    
   }
   calendar.init();
 });
