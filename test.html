@@ -18,7 +18,7 @@
 
       /* Style du calendrier */
       #calendar {
-        width: 300px;
+        width: 500px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,9 @@
   <body>
     <div id="calendar">
       <div class="header">Calendrier Sélectif</div>
-      <div class="calendar-container" id="datepicker"></div> <!-- Calendrier sans champ input -->
+      <div class="calendar-container">
+        <div id="datepicker"></div>
+      </div>
     </div>
 
     <script>
@@ -69,8 +71,11 @@
             return allowedDates.includes(date.format('YYYY-MM-DD'));
           },
         },
-        // Affichage du calendrier directement sans champ de saisie
-        inline: true,
+        // Pour afficher un calendrier complet
+        inline: true, // Affichage du calendrier sans champ de saisie
+        setup: (picker) => {
+          // Optionnel: personnalisation de l'apparence ou du comportement du calendrier
+        },
       });
     </script>
   </body>

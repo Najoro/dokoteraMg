@@ -118,8 +118,10 @@ const calendar = {
       element: document.getElementById('datepicker'),
       css: [
         'https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.css',
+        './assets/css/styles.css',
       ],
-      plugins: ['LockPlugin'],
+      locale: "fr-FR",
+      plugins: ['LockPlugin','LangPlugin'],
       LockPlugin: {
         filter(date, picked) {
           // Bloquer toutes les dates sauf celles spécifiées dans allowedDates

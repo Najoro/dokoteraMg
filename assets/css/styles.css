@@ -4,6 +4,7 @@
     --color3 : #D2EAEF;
     --color4 : #F6F6F6;
     --color5 :  rgb(238, 237, 237);
+    --color6 : #307BC4;
 }
 /*principale -----------------------*/
 .ff-poppins-bold{
@@ -86,8 +87,36 @@ button.iti__selected-country{
 .test{
     border: 1px solid red;
 }
-/*Menu -------------------------------------*/
-
+/*date -------------------------------------*/
+.calendar-container{
+    display: none;
+}
+.inline {
+    box-shadow: none !important;
+    left: 0;
+    position: relative;
+    top: 0;
+    transform: scaleY(1);
+    width: 100% !important;
+    height: 310px !important;
+}
+.calendar>.days-grid {
+    display: grid
+;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 2px;
+    align-items: center;
+    justify-items: center;
+}
+.container.lock-plugin .calendar>.days-grid>.day.locked:not(.start):not(.end) {
+    font-style: italic;
+    background: var(--color6);
+    border-radius: 50%;
+    color: white;
+}
+.calendar>.header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.562);
+}
 /*datepicker----------------------------------------*/
  #datepicker {
     width: 100% !important;
