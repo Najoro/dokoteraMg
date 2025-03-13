@@ -30,18 +30,34 @@
 
 <body class="ff-inter-normal">
     <!-- Navbar Start -->
-    <nav class="navbar navbar-white bg-white p-2 border-bottom d-block d-lg-none">
+    <nav class="navbar navbar-white bg-white p-2 border-bottom">
         <div class="container-fluid ">
             <div class="d-flex align-items-center">
                 <div class="logo">
                     <h1 class="ff-inter-bold">
-                        <a class="navbar-brand ff-poppins-bold" href="#">DokoteraMG</a>
+                        <a class="navbar-brand ff-poppins-bold" href="./client-home.html">DokoteraMG</a>
                     </h1>
                 </div>
 
             </div>
 
-            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navBar"
+            <div class="d-flex justify-content-around align-items-center gap-2">
+                <div class="notif">
+                    <i class="bi bi-bell fs-4"></i>
+                </div>
+                
+                <div class="dropdown">
+                    <div class="d-flex align-items-center justify-content-center gap-1" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="img"><img src="./assets/images/profile.png" alt="profile user"></div>
+                        <p class="m-0">Stevan dux</p>
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="./client_profile.html"><i class="bi bi-person-circle me-1"></i>profil</a></li>
+                      <li><a class="dropdown-item" href="./Inscription.html"> <i class="bi bi-box-arrow-in-right me-1"></i>Deconnexion</a></li>
+                    </ul>
+                  </div>
+            </div>
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navBar"
                 aria-controls="navBar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,35 +65,24 @@
 
         <div class="offcanvas offcanvas-start text-bg-white" tabindex="-1" id="navBar" aria-labelledby="navBarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG</h5>
+                <h5 class="offcanvas-title text-center w-100" id="navBarLabel">DokoteraMG</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
             </div>
             <div class="offcanvas-body">
-                <ul class="list-unstyled list-group d-flex gap-2">
-                    <li class="list-group-item border-0 shadow">
-                        <a href="./client-home.html" class="text-reset text-decoration-none fs-14-px ">
-                            <i class="bi bi-house-door-fill icone-sm"></i>
-                            <span>Acceuil</span>
-                        </a>
-                    </li>
-                    <li class="list-group-item border-0 shadow active">
-                        <a href="./client_profile.html" class="text-reset text-decoration-none fs-14-px ">
-                            <i class="bi bi-person-circle icone-sm"></i>
-                            <span>Profile</span>
-                        </a>
-                    </li>
-                    <li class="list-group-item border-0 shadow">
-                        <a href="./connexion.html" class="text-reset text-decoration-none fs-14-px">
-                            <i class="bi bi-box-arrow-right icone-sm"></i>
-                            <span>Déconexion</span>
-                        </a>
-                    </li>
-
-                </ul>
-                <div class="position-absolute" style="bottom: 0;">
-                    <img src="./assets/images/control_rapide.png" class="img-fluid" alt="">
+                <div class="my-2">
+                    <a href="./connexion.html" class="w-100 btn btn-outline-primary p-2 fw-bold"> Connexion</a>
                 </div>
+                <div class="my-2">
+                    <a href="./Inscription.html" class="w-100 btn btn-primary p-2">Inscription </a>
+                </div>
+
+                <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
+                    <li class="nav-item my-2">
+                        <a class="nav-link d-flex align-items-center fw-bold opacity-75" aria-current="page" href="#">
+                            Passez à la version premium
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -86,44 +91,9 @@
 
     <main class="container-fluid h-100 m-0">
         <div class="row h-100">
-            <!--navbar Lateral-->
-            <div class="col-lg-2 border nav-bar-lateral p-0">
-                <div class="h-100  d-none d-lg-block position-fixed col-lg-2 p-2">
-                    <div class="my-3 mt-3">
-                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG
-                        </h5>
-                    </div>
-                    <ul class="list-unstyled list-group d-flex gap-2 ">
-                        <li class="list-group-item border-0 shadow active">
-                            <a href="./client-home.html" class="text-reset text-decoration-none fs-14-px ">
-                                <i class="bi bi-house-door-fill icone-sm"></i>
-                                <span>Acceuil</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0 shadow ">
-                            <a href="./client_profile.html" class="text-reset text-decoration-none fs-14-px ">
-                                <i class="bi bi-person-circle icone-sm"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item border-0 shadow">
-                            <a href="./connexion.html" class="text-reset text-decoration-none fs-14-px">
-                                <i class="bi bi-box-arrow-right icone-sm"></i>
-                                <span>Déconexion</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                    <div class="position-absolute" style="bottom: 0;">
-                        <img src="./assets/images/control_rapide.png" class="img-fluid" alt="">
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="col-lg-10 p-3">
-                <div class="container   my-4 ">
+            
+            <div class="col-lg-12">
+                <div class="container my-2 ">
                     <div class="p-4">
                         <div class="row bg-white shadow rounded-2 p-3 posre">
                             <!-- Partie Gauche -->
