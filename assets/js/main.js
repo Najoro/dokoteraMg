@@ -1,3 +1,6 @@
+import Booking  from "./Booking.js";
+
+
 $(document).ready(function () {
   const Historiques = [
     {
@@ -93,13 +96,16 @@ $(document).ready(function () {
   ];
   
 
- if ($("body").hasClass("profile-page")) {     
+  if ($("body").hasClass("profile-page")) {     
     Historique.init(Historiques);
+  }else if($('body').hasClass('doctor-details')){
+    calendar.init();
+  }else if($('body').hasClass('booking-page')){
+    Booking.stepOne();
   }else{
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
   }
-  calendar.init();
 });
 const calendar = {
   allowedDates: [
@@ -132,6 +138,7 @@ const calendar = {
     });
   }
 };
+
 const Evenement = {
   toogleShowPassword: function () {
     $("body").on("click", "#toogle-show-password", function () {
@@ -352,6 +359,8 @@ var HistoriqueFunctions = {
     }
   },
 };
+
+
 const Templante = {
   EachHistorique: function (Historique) {
     return `

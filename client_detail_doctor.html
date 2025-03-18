@@ -19,14 +19,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
         rel="stylesheet">
-        
+
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
-<body class="ff-inter-normal profile-page">
+<body class="ff-inter-normal doctor-details">
     <!-- Navbar Start -->
     <nav class="navbar navbar-white bg-white p-2 border-bottom">
         <div class="container-fluid ">
@@ -43,17 +42,20 @@
                 <div class="notif">
                     <i class="bi bi-bell fs-4"></i>
                 </div>
-                
+
                 <div class="dropdown">
-                    <div class="d-flex align-items-center justify-content-center gap-1" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="d-flex align-items-center justify-content-center gap-1" role="button"
+                        id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="img"><img src="./assets/images/profile.png" alt="profile user"></div>
                         <p class="m-0">Stevan dux</p>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item" href="./client_profile.html"><i class="bi bi-person-circle me-1"></i>profil</a></li>
-                      <li><a class="dropdown-item" href="./Inscription.html"> <i class="bi bi-box-arrow-in-right me-1"></i>Deconnexion</a></li>
+                        <li><a class="dropdown-item" href="./client_profile.html"><i
+                                    class="bi bi-person-circle me-1"></i>profil</a></li>
+                        <li><a class="dropdown-item" href="./Inscription.html"> <i
+                                    class="bi bi-box-arrow-in-right me-1"></i>Deconnexion</a></li>
                     </ul>
-                  </div>
+                </div>
             </div>
             <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navBar"
                 aria-controls="navBar" aria-label="Toggle navigation">
@@ -88,77 +90,76 @@
 
 
     <main class="container-fluid h-100 m-0">
-        <div class="row h-100">
-            <div class="col-lg-12 p-3">
-                <h6 class="opacity-75 pointer-event"><a href="./client-home.html">Docteurs</a> > Detail</h6>
-                <div class="my-3 bg-linear-right rounded-4 d-flex justify-content-between">
-                    <div class="  text-white">
-                        <div class="d-flex justify-content-around align-items-center p-4 flex-column-reverse flex-md-row">
-                            <div class="w-100 w-md-50">
-                                <h3>Amanda Clara</h3>
-                                <p class="fs-14-px d-flex align-items-center gap-2">
-                                    <i class="bi bi-geo-alt fs-4"></i>2464 Royal Ln. Mesa, New Jersey 45463</p>
-                                <p><strong>Spécialiste Pédiatrique</strong>| 12 ans d’expérience </p>
-                                <p class="fs-14-px">Lorem ipsum dolor sit amet consectetur. Ultrices at purus
-                                    consectetur et. In nunc blandit est duis mauris.. Ultrices aliquam lacinia mattis
-                                    nec. Rhoncus faucibus ut.
-                                    Lorem ipsum dolor sit amet consectetur. Ultrices at purus consectetur et. In nunc
-                                    blandit est duis mauris.. Ultrices aliquam lacinia mattis nec. Rhoncus faucibus ut.
-                                </p>
-                            </div>
-                            <div class="">
-                                <img src="./assets/images/profile-cercle.png" class="img-cercle" alt="">
-                            </div>
+        <h6 class="opacity-75 pointer-event"><a href="./client-home.html">Docteurs</a> > Detail</h6>
+        <div class="container">
+            <div class="  my-3 bg-linear-right rounded-4 d-flex justify-content-between">
+                <div class="  text-white">
+                    <div class="d-flex justify-content-around align-items-center p-4 flex-column-reverse flex-md-row">
+                        <div class="w-100 w-md-50">
+                            <h3>Amanda Clara</h3>
+                            <p class="fs-14-px d-flex align-items-center gap-2">
+                                <i class="bi bi-geo-alt fs-4"></i>2464 Royal Ln. Mesa, New Jersey 45463
+                            </p>
+                            <p><strong>Spécialiste Pédiatrique</strong>| 12 ans d’expérience </p>
+                            <p class="fs-14-px">Lorem ipsum dolor sit amet consectetur. Ultrices at purus
+                                consectetur et. In nunc blandit est duis mauris.. Ultrices aliquam lacinia mattis
+                                nec. Rhoncus faucibus ut.
+                                Lorem ipsum dolor sit amet consectetur. Ultrices at purus consectetur et. In nunc
+                                blandit est duis mauris.. Ultrices aliquam lacinia mattis nec. Rhoncus faucibus ut.
+                            </p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-7  justify-content-around align-items-center">
-                            <div class="container mt-3">
-                                <div class="card text-center rounded-4">
-                                    <div class="card-header">
-                                        <h3>Disponibilité</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="calendar-container" id="datepicker"></div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="container mt-3 h-100 d-flex justify-content-md-around flex-column">
-                            <div class="card text-center rounded-4">
-                                <div class="card-body">
-                                    <div class="fw-bold fs-4 mb-2">Tarifs</div>
-                                    <div class="row">
-                                        <div class="col border-end">
-                                            <h5 class="fw-semibold border-bottom border-top pt-3">Consultations</h5>
-                                            <div class="d-flex justify-content-center align-items-center gap-2 my-3">
-                                                <img src="./assets/images/money.png" alt="Icone pièce" width="30">
-                                                <p class="fs-5 fw-semibold m-0">$25</p>
-                                            </div>
-                                            <p class="text-muted">À partir</p>
-                                        </div>
-                                        <div class="col">
-                                            <h5 class="fw-semibold border-bottom border-top pt-3">Déplacement</h5>
-                                            <div class="d-flex justify-content-center align-items-center gap-2 my-3">
-                                                <img src="./assets/images/money.png" alt="Icone pièce" width="30">
-                                                <p class="fs-5 fw-semibold m-0">$25</p>
-                                            </div>
-                                            <p class="text-muted">À partir</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="my-3 d-flex justify-content-center">
-                                <a href="./reservation_etape_1.html" class="btn btn-primary w-75">Prendre rendez-vous</a>
-                            </div>
+                        <div class="">
+                            <img src="./assets/images/profile-cercle.png" class="img-cercle" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-7  justify-content-around align-items-center">
+                    <div class="container mt-3">
+                        <div class="card text-center rounded-4">
+                            <div class="card-header">
+                                <h3>Disponibilité</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="calendar-container" id="datepicker"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="container mt-3 h-100 d-flex justify-content-md-around flex-column">
+                        <div class="card text-center rounded-4">
+                            <div class="card-body">
+                                <div class="fw-bold fs-4 mb-2">Tarifs</div>
+                                <div class="row">
+                                    <div class="col border-end">
+                                        <h5 class="fw-semibold border-bottom border-top pt-3">Consultations</h5>
+                                        <div class="d-flex justify-content-center align-items-center gap-2 my-3">
+                                            <img src="./assets/images/money.png" alt="Icone pièce" width="30">
+                                            <p class="fs-5 fw-semibold m-0">$25</p>
+                                        </div>
+                                        <p class="text-muted">À partir</p>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="fw-semibold border-bottom border-top pt-3">Déplacement</h5>
+                                        <div class="d-flex justify-content-center align-items-center gap-2 my-3">
+                                            <img src="./assets/images/money.png" alt="Icone pièce" width="30">
+                                            <p class="fs-5 fw-semibold m-0">$25</p>
+                                        </div>
+                                        <p class="text-muted">À partir</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-3 d-flex justify-content-center">
+                            <a href="./reservation_etape_1.html" class="btn btn-primary w-75">Prendre rendez-vous</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
@@ -170,12 +171,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.1/dist/index.umd.min.js"></script>
 
     <script
         src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
 
-    <script src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 
 </body>
 
