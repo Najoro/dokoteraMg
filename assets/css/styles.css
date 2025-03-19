@@ -136,6 +136,12 @@ button.iti__selected-country{
 .card-select-hour:active{
     transform: scale(0.9);
 }
+.card-select-hour input{
+    display: none;
+}
+.selectedInput{
+    background-color: var(--color2);
+}
 div#hour-selection {
     display: flex;
     align-items: center;

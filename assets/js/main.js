@@ -1,5 +1,3 @@
-import Booking  from "./Booking.js";
-
 
 $(document).ready(function () {
   const Historiques = [
@@ -94,19 +92,71 @@ $(document).ready(function () {
       timeEnd: "16h 00",
     },
   ];
-  
 
   if ($("body").hasClass("profile-page")) {     
     Historique.init(Historiques);
-  }else if($('body').hasClass('doctor-details')){
-    calendar.init();
-  }else if($('body').hasClass('booking-page')){
-    Booking.stepOne();
-  }else{
+  }
+  if($('body').hasClass('authentification-page')){
     Evenement.toogleShowPassword();
     Evenement.initlTelInput();
   }
+  if($('body').hasClass('doctor-details')){
+    calendar.init();
+  }
+
+  if($('body').hasClass('booking-page')){
+    Booking.stepOne();
+    Booking.displayDayOn();
+  }
 });
+
+const Booking = {
+  allowedDates: [
+    '2025-03-01',
+    '2025-03-03',
+    '2025-03-07',
+    '2025-03-11',
+    '2025-03-17',
+    '2025-03-21',
+  ],
+  DayOn : [
+    "07h 20",
+    "08h 10",
+    "10h 30",
+    "11h 30",
+    "13h 30",
+    "15h 30",
+  ],
+  stepOne: function() {
+    
+    const pikerInit = calendar.init();
+    pikerInit.on('select', (e) => {
+      const $wrapperDateSelect = $('#selected-date');
+      const selectedDate = e.detail.date.format('YYYY-MM-DD');
+      $wrapperDateSelect.html(selectedDate)
+    })
+  },
+
+  displayDayOn : function() {
+    console.log("display on day");
+    
+    let hourSelection = $("#hour-selection");
+    this.DayOn.forEach(time => {
+      let formattedTime = time.replace("h", ":").trim();
+    
+      let label = $("<label>").addClass("card-select-hour");
+      let checkbox = $("<input>").attr({ type: "checkbox", value: formattedTime,class: "hour-checkbox" });
+
+     
+      label.append(checkbox).append(formattedTime);
+      hourSelection.append(label);
+      $(".hour-checkbox").change(function() {
+        $(this).parent().toggleClass("selectedInput");
+      });
+    });
+  }
+
+}
 const calendar = {
   allowedDates: [
     '2025-03-01',
@@ -136,12 +186,15 @@ const calendar = {
       // Affichage du calendrier directement sans champ de saisie
       inline: true,
     });
+
+    return picker;
   }
 };
 
 const Evenement = {
   toogleShowPassword: function () {
     $("body").on("click", "#toogle-show-password", function () {
+      
       const $password = $("#password");
       const $this = $(this);
       var icon = $this.find("i");
