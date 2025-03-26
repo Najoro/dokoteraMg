@@ -19,8 +19,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/css/bootstrap-switch-button.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -51,44 +51,26 @@
 
             </div>
             <div class="offcanvas-body">
-                <ul class="list-unstyled list-group  d-flex justify-content-between h-25">
-                    <li class="list-group-item border-0 shadow opacity-75">
-                        <a href="./tableaux_de_bord_2.html"
-                            class="text-decoration-none text-reset opacity-75 fs-14-px">
-                            <i class="bi bi-speedometer2 fs-5 mx-1"></i>
-                            <span>Tableau de bord</span>
+                <ul class="list-unstyled list-group d-flex gap-2">
+                    <li class="list-group-item border-0 shadow">
+                        <a href="./client-home.html" class="text-reset text-decoration-none fs-14-px ">
+                            <i class="bi bi-house-door-fill icone-sm"></i>
+                            <span>Acceuil</span>
                         </a>
                     </li>
-                    <li class="list-group-item border-0 shadow opacity-75">
-                        <a href="./document.html" class="text-reset text-decoration-none fs-14-px">
-                            <i class="bi bi-files fs-5 mx-1"></i>
-                            <span>Documents</span>
-                        </a>
-                    </li>
-                    <li class="list-group-item border-0 shadow opacity-75">
-                        <a href="./disponibilite.html" class="text-reset text-decoration-none fs-14-px">
-                            <i class="bi bi-calendar fs-5 mx-1"></i>
-                            <span> Ma disponibilité</span>
-                        </a>
-                    </li>
-                    <li class="list-group-item border-0 shadow opacity-75 ">
-                        <a href="./consultations.html" class="text-reset text-decoration-none fs-14-px">
-                            <i class="bi bi-people  fs-5 mx-1"></i>
-                            <span>Mes consultations</span>
-                        </a>
-                    </li>
-                    <li class="list-group-item border-0 shadow opacity-75 active ">
-                        <a href="./profile.html" class="text-reset text-decoration-none fs-14-px ">
-                            <i class="bi bi-person-circle fs-5 mx-1"></i>
+                    <li class="list-group-item border-0 shadow active">
+                        <a href="./client_profile.html" class="text-reset text-decoration-none fs-14-px ">
+                            <i class="bi bi-person-circle icone-sm"></i>
                             <span>Profile</span>
                         </a>
                     </li>
-                    <li class="list-group-item border-0 shadow opacity-75">
-                        <a href="" class="text-reset text-decoration-none fs-14-px">
-                            <i class="bi bi-box-arrow-right fs-5 mx-1"></i>
+                    <li class="list-group-item border-0 shadow">
+                        <a href="./connexion.html" class="text-reset text-decoration-none fs-14-px">
+                            <i class="bi bi-box-arrow-right icone-sm"></i>
                             <span>Déconexion</span>
                         </a>
                     </li>
+                    
                 </ul>
                 <div class="position-absolute" style="bottom: 0;">
                     <img src="./assets/images/control_rapide.png" class="img-fluid" alt="">
@@ -102,27 +84,31 @@
     <main class="container-fluid h-100 m-0">
         <div class="row h-100">
             <!--navbar Lateral-->
-            <div class="col-lg-2 border nav-bar-lateral">
-                <div class="h-100  d-none d-lg-block position-fixed" style="min-width: 100px; height: 100vh;">
-                    <div class="my-5 mt-3">
-                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG
-                        </h5>
+            <div class="col-lg-2 border nav-bar-lateral p-0">
+                <div class="h-100  d-none d-lg-block position-fixed col-lg-2 p-2">
+                    <div class="my-3 mt-3">
+                        <h5 class="offcanvas-title text-center w-100 ff-inter-bold fs-4" id="navBarLabel">DokoteraMG</h5>
                     </div>
-                    <ul class="list-unstyled list-group d-flex h-25">
-                        
-                        <li class="list-group-item border-0 shadow opacity-75 active ">
-                            <a href="./profile.html" class="text-reset text-decoration-none fs-14-px ">
-                                <i class="bi bi-person-circle fs-5 mx-1"></i>
+                    <ul class="list-unstyled list-group d-flex gap-2">
+                        <li class="list-group-item border-0 shadow">
+                            <a href="./client-home.html" class="text-reset text-decoration-none fs-14-px ">
+                                <i class="bi bi-house-door-fill icone-sm"></i>
+                                <span>Acceuil</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item border-0 shadow active">
+                            <a href="./client_profile.html" class="text-reset text-decoration-none fs-14-px ">
+                                <i class="bi bi-person-circle icone-sm"></i>
                                 <span>Profile</span>
                             </a>
                         </li>
-                        <li class="list-group-item border-0 shadow opacity-75">
-                            <a href="./Inscription.html"
-                                class="text-decoration-none text-reset opacity-75 fs-14-px">
-                                <i class="bi bi-box-arrow-in-right me-1 fs-5 mx-1"></i>
-                                <span>Deconnexion</span>
+                        <li class="list-group-item border-0 shadow">
+                            <a href="./connexion.html" class="text-reset text-decoration-none fs-14-px">
+                                <i class="bi bi-box-arrow-right icone-sm"></i>
+                                <span>Déconexion</span>
                             </a>
                         </li>
+                        
                     </ul>
                     <div class="position-absolute" style="bottom: 0;">
                         <img src="./assets/images/control_rapide.png" class="img-fluid" alt="">
@@ -130,7 +116,7 @@
                 </div>
 
             </div>
-
+            
 
             <div class="col-lg-10 p-3">
                 <!--search bar-->
@@ -166,17 +152,12 @@
                 <div class="row">
 
                     <div id="tabs-general" class="tabs container my-2">
-                        <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link  active me-2 px-5 border text-dark opacity-75"
-                                    id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
-                                    role="tab" aria-controls="pills-home" aria-selected="true">Générale</button>
+                                <button class="nav-link active me-2 px-5 border text-dark opacity-75" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Générale</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link me-2 px-5 border text-dark opacity-75"
-                                    id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                    type="button" role="tab" aria-controls="pills-profile"
-                                    aria-selected="false">Historique</button>
+                                <button class="nav-link me-2 px-5 border text-dark opacity-75" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" tabindex="-1">Historique</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
@@ -318,10 +299,8 @@
                                                     class="col-md-6 my-2 d-flex justify-content-between align-items-center flex-md-row flex-column border-start">
                                                     <span>Notifications</span>
                                                     <div id="switch-btn" class="">
-                                                        <span class="fs-14-px opacity-75">Activer les
-                                                            notifications</span>
-                                                        <input class="" type="checkbox" data-toggle="switchbutton"
-                                                            checked data-size="sm">
+                                                        <span class="fs-14-px opacity-75">Activer les notifications</span>
+                                                        <input class="" type="checkbox" data-toggle="switchbutton"checked data-size="sm">
                                                     </div>
                                                 </div>
                                             </div>
@@ -359,12 +338,10 @@
                 </div>
             </div>
         </div>
-
+        
     </main>
-    </button>
-
-    <!-- Modal1 -->
-    <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+     <!-- Modal1 -->
+     <div class="modal fade" id="myModal1" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -472,7 +449,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -482,10 +458,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script
-        src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.js'></script>
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/fr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
 
     <script src="./assets/js/main.js"></script>
 
