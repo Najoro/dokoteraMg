@@ -103,10 +103,12 @@ $(document).ready(function () {
   if($('body').hasClass('doctor-details')){
     calendar.init();
   }
-
-  if($('body').hasClass('booking-page')){
+  if($('body').hasClass('booking-page1')){
     Booking.stepOne();
     Booking.displayDayOn();
+  }
+  if($('body').hasClass('booking-page2')){
+    Booking.stepTwo();
   }
 });
 
@@ -137,9 +139,7 @@ const Booking = {
     })
   },
 
-  displayDayOn : function() {
-    console.log("display on day");
-    
+  displayDayOn : function() {    
     let hourSelection = $("#hour-selection");
     this.DayOn.forEach(time => {
       let formattedTime = time.replace("h", ":").trim();
@@ -154,6 +154,9 @@ const Booking = {
         $(this).parent().toggleClass("selectedInput");
       });
     });
+  },
+  stepTwo : function() {
+    Evenement.initlTelInput();
   }
 
 }
@@ -211,6 +214,7 @@ const Evenement = {
 
   initlTelInput: function () {
     const input = document.querySelector("#phone");
+    
     window.intlTelInput(input, {
       initialCountry: "mg",
       separateDialCode: true,
